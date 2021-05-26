@@ -74,13 +74,22 @@ p{
   font-family: 'Squada One';
 }
 
-.login form{
-
-}
-
 .wrapper_forms{
   margin-top: 15px;
 }
+
+.wrapper_forms input{
+  transition: width 1s;
+}
+
+.wrapper_forms input:focus{
+  width:80%;
+}
+
+#submit:hover{
+  opacity: 0.85;
+}
+
 
 .sign_up{
   float: left;
