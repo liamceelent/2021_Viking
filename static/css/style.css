@@ -11,6 +11,9 @@ p{
   margin:0px;
 }
 
+#login, #sign{
+  background-color: rgb(11, 12, 16);
+}
 .nav{
   float:left;
 }
@@ -19,11 +22,10 @@ p{
   background-color: rgb(11, 12, 16);
   height: 100%;
   width:100%;
-  display: flex;
 }
 
 .login_box{
-  border: 5px solid rgb(69, 162, 158);
+  border: 7px solid rgb(69, 162, 158);
   border-radius: 10px;
   width:30%;
   height:30%;
@@ -34,13 +36,20 @@ p{
 }
 
 .login{
-  margin-top: 10%;
+  margin-top: 7.5%;
 }
 
 .login p{
   color: rgb(197, 198, 199);
   font-family: 'Squada One', cursive;
   font-size: 30px;
+}
+
+.forgot_write p{
+  color: rgb(197, 198, 199);
+  font-family: 'Squada One';
+  font-size: 20px;
+  margin: 5% 1% 0% 1%;
 }
 
 .login input{
@@ -52,6 +61,32 @@ p{
 .login form{
 
 }
+
 .wrapper_forms{
   margin-top: 15px;
+}
+
+.sign_up{
+  float: left;
+  margin: auto;
+  width:100%;
+  padding-top: 30px;
+  font-family: 'Squada One', cursive;
+}
+
+.sign_up_btn{
+  margin-left: 40%;
+  float: left;
+}
+.forgot_btn{
+  margin-left: 10%;
+  float: left;
+}
+
+.sign_up_btn a,.forgot_btn a, .back_sign a{
+  color: rgb(197, 198, 199);
+}
+
+.back_sign{
+  margin-left: 48%;
 }

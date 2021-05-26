@@ -22,6 +22,18 @@ def login():
     return render_template('login.html', page_title="Login")
 
 
+@app.route('/sign_up')
+def sign_up():
+
+    return render_template('sign.html', page_title="Login")
+
+
+@app.route('/forgot')
+def forgot():
+
+    return render_template('forgot.html', page_title="forgot")
+
+
 @app.route('/login', methods=['POST'])
 def login_post():
 

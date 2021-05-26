@@ -3,13 +3,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
-  <body id = "login">
+  <body id = "sign">
 
-    <div name = "wrapper_login">
+    <div class = "wrapper_login">
 
       <div class = "login_box">
         <div class = "login">
-          <p> Log in to Vikings</p>
+          <p> Create an account.</p>
           <div class = "wrapper_forms">
             <form method="POST">
               <input name="name" required = "required">
@@ -18,7 +18,7 @@
               <input name="pass" required = "required">
             </form>
             <form method="POST">
-              <input type="submit" formmethod = post value="Login">
+              <input type="submit" formmethod = post value="Sign up">
             </form>
           </div>
         </div>
@@ -26,17 +26,13 @@
 
       <div class = "sign_up">
 
-        <div class = "sign_up_btn">
-          <a href="/sign_up">Create an account?</a>
-        </div>
-
-        <div class = "forgot_btn">
-          <a href="/forgot">Forgot password?</a>
+        <div class = "back_sign">
+          <a href="/login">Back to login</a>
         </div>
 
       </div>
 
-
+    </div>
 
 
 </body>
