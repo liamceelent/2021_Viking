@@ -52,7 +52,7 @@ def history():
     return render_template('history.html', page_title="history")
 
 
-@app.route('/equipment', methods=['POST'])
+@app.route('/equipment')
 def equipment():
 
     return render_template('equipment.html', page_title="equipment")
