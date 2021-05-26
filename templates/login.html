@@ -1,26 +1,34 @@
-{% extends 'layout.html' %}
 
-{% block content %}
 
-<div class = "create_box">
-  <div class = "sign_up_section">
-    <h1> sign up???</h1>
-    <form method="POST">
-      <input name="create_name" required = "required">
-      <input name="create_pass" required = "required">
-      <input type="submit" formmethod = post>
-    </form>
-  </div>
-  <div class = "login_section">
-    <h1> login???</h1>
-    <form method="POST">
-      <input name="name" required = "required">
-      <input name="pass" required = "required">
-      <input type="submit" formmethod = post>
-    </form>
-  </div>
-</div>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
 
-{{stat}}
+    <div class = "wrapper_login">
 
-{% endblock %}
+      <div class = "login_box">
+        <div class = "login">
+          <p> Log in to Vikings</p>
+          <div class = "wrapper_forms">
+            <form method="POST">
+              <input name="name" required = "required">
+            </form>
+            <form method="POST">
+              <input name="pass" required = "required">
+            </form>
+            <form method="POST">
+              <input type="submit" formmethod = post value="Login">
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {{stat}}
+
+  </body>
+</html>

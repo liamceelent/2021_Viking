@@ -16,11 +16,34 @@ def home():
     return render_template('home.html', page_title="Home")
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login')
 def login():
-    
+
     return render_template('login.html', page_title="Login")
 
+
+@app.route('/login', methods=['POST'])
+def login_post():
+
+    return render_template('login.html', page_title="Login")
+
+
+@app.route('/map')
+def map():
+
+    return render_template('map.html', page_title="map")
+
+
+@app.route('/history')
+def history():
+
+    return render_template('history.html', page_title="history")
+
+
+@app.route('/equipment', methods=['POST'])
+def equipment():
+
+    return render_template('equipment.html', page_title="equipment")
 
 
 if __name__ == "__main__":
