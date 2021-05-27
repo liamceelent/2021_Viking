@@ -8,9 +8,4 @@ class User(db.Model):
     key = db.Column(db.String(225))
 
 
-
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    blog_post = db.Column(db.String(225))
-
 db.create_all()

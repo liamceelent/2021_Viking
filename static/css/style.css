@@ -35,8 +35,8 @@ p{
 
 .wrapper_login{
   background-color: rgb(11, 12, 16);
-  height: 100%;
-  width:100%;
+  height: auto;
+  width:auto;
 }
 
 .login_box{
@@ -80,6 +80,7 @@ p{
 
 .wrapper_forms input{
   transition: width 1s;
+  margin-top: 4%;
 }
 
 .wrapper_forms input:focus{
@@ -115,4 +116,9 @@ p{
 
 .back_sign{
   margin-left: 48%;
+}
+
+.stat_login{
+  color:rgb(197, 198, 199);
+  font-family: 'Squada One', cursive;
 }

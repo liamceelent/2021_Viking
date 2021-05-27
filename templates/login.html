@@ -6,20 +6,18 @@
   <body id = "login">
 
     <div name = "wrapper_login">
-
       <div class = "login_box">
         <div class = "login">
           <p> Log in to Vikings</p>
           <div class = "wrapper_forms">
             <form method="POST">
               <input name="name" required = "required">
-            </form>
-            <form method="POST">
               <input name="pass"  type="password" required = "required">
-            </form>
-            <form method="POST">
               <input type="submit" formmethod = post value="Login" id = "submit">
             </form>
+          </div>
+          <div class = "stat_login">
+          {{status}}
           </div>
         </div>
       </div>
@@ -35,8 +33,6 @@
         </div>
 
       </div>
-
-
 
 
 </body>

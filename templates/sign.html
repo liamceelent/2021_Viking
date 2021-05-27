@@ -12,14 +12,13 @@
           <p> Create an account.</p>
           <div class = "wrapper_forms">
             <form method="POST">
-              <input name="name" required = "required">
-            </form>
-            <form method="POST">
-              <input name="pass" required = "required">
-            </form>
-            <form method="POST">
+              <input name="sign_name" required = "required">
+              <input name="sign_pass" type="password" required = "required">
               <input type="submit" formmethod = post value="Sign up" id = "submit">
             </form>
+          </div>
+          <div class = "stat_login">
+            {{status}}
           </div>
         </div>
       </div>
