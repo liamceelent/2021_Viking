@@ -19,6 +19,8 @@ p{
   background-color: rgb(11, 12, 16);
 }
 
+/*nabavcvcvavvavavavavavva*/
+
 .nav{
   float:left;
   background-color: rgb(11, 12, 16);
@@ -35,7 +37,28 @@ p{
   margin-left:5%;
 }
 
+/*hommememememememme*/
 
+.axe{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -60px 0 0 150px;
+    -webkit-animation: spin 2s linear infinite;
+
+}
+
+@-webkit-keyframes spin{
+    50%  {left: 0px; top: 0px;}
+    50%  {left: 200px; top: 200px;}
+    100%{-webkit-transform: rotate(360deg);}
+}
+
+
+
+/*loginnnnnnnnnnn*/
 
 .wrapper_login{
   background-color: rgb(11, 12, 16);
@@ -126,6 +149,8 @@ p{
   color:rgb(197, 198, 199);
   font-family: 'Squada One', cursive;
 }
+
+/*mapssssssssssssssss*/
 
 .map_wrapper{
   width:80%;
