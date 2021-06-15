@@ -3,12 +3,16 @@
 
 
 
-body{
-  margin:0px;
+body,
+h1,
+h2,
+p {
+  margin: 0;
 }
 
-p{
-  margin:0px;
+p,
+input{
+  font-family: 'Squada One', cursive;
 }
 
 #login, #sign{
@@ -71,7 +75,6 @@ p{
   border-radius: 1vw;
   width:30%;
   height:30%;
-  top:50%;
   left:50%;
   margin: 15% 0 0 35%;
   text-align: center;
@@ -83,13 +86,11 @@ p{
 
 .login p{
   color: rgb(197, 198, 199);
-  font-family: 'Squada One', cursive;
   font-size:1.5vw;
 }
 
 .forgot_write p{
   color: rgb(197, 198, 199);
-  font-family: 'Squada One';
   font-size: 20px;
   margin: 5% 1% 0% 1%;
 }
@@ -98,7 +99,6 @@ p{
   width:75%;
   height:10%;
   border-radius: 5px;
-  font-family: 'Squada One';
 }
 
 .wrapper_forms{
