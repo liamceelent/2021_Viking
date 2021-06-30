@@ -7,4 +7,4 @@ DEBUG: pause: True
 DEBUG: repl: python
 DEBUG: args: ['C:\\Users\\17558\\github\\2021_Viking\\models.py']
 INFO: return code: 1 (0x1)
-INFO: elapsed time: 1.009045
+INFO: elapsed time: 1.083321
