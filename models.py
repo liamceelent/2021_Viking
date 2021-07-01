@@ -7,6 +7,7 @@ class User(db.Model):
     name = db.Column(db.String(225), unique=True)
     salt = db.Column(db.String(225))
     key = db.Column(db.String(225))
+    coin = db.Column(db.Integer)
 
 class Location(db.Model):
     __tablename__ = "Location"
@@ -33,6 +34,7 @@ class Famous_Viking(db.Model):
     fid = db.Column(db.Integer, db.ForeignKey('Faction.id'), nullable = False)
     wid = db.Column(db.Integer, db.ForeignKey('Weapon.id'), nullable = False)
     kill = db.Column(db.Integer)
+    rating = db.Column(db.Integer)
 
 class Weapon(db.Model):
     __tablename__ = "Weapon"
