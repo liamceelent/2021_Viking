@@ -1,14 +1,48 @@
-{% extends 'layout.html' %}
 
-{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+
+     google.charts.load('current', {
+       'packages':['geochart'],
+       // Note: you will need to get a mapsApiKey for your project.
+       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+     });
+     google.charts.setOnLoadCallback(drawRegionsMap);
+
+     function drawRegionsMap() {
+       var data = google.visualization.arrayToDataTable([
+         ['Country',   'Latitude'],
+         ['Russia', 1], ['Germany', 2], ['Italy',3], ['France', 4], ['United Kingdom', 5], ['Netherlands', 6],['Switerland', 7], ['Greece', 8], ['Poland',9], ['Austria', 10], ['Belgium', 11], ['Sweden', 12], ['Denmark', 13], ['Ukraine', 14], ['Croatia',15], ['Hungary', 16], ['Norway', 17], ['Czechia', 18],['Finland', 19], ['Malta', 20], ['Romania',21], ['Ireland', 22], ['Serbia', 23], ['Iceland', 24], ['Albania', 25], ['Belarus', 26], ['Bulgaria',27], ['North Macedonia', 28], ['Luxembourg', 29], ['Slovakia', 30],['Slovenia', 31], ['Lithuania', 32], ['Moldova',33], ['Montenegro', 34], ['Estonia', 35], ['Finland', 36], ['Latvia', 37], ['Switzerland', 38],['Czech Republic', 39],['Bosnia and Herzegovina', 40], ['Kosovo', 41], ['North Macedonia', 42],
+       ]);
+
+       var options = {
+         region: '150', // Africa
+         colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', 'white']},
+         backgroundColor: '#81d4fa',
+         datalessRegionColor: 'aqua',
+         defaultColor: 'aqua',
+       };
+
+       var chart = new google.visualization.GeoChart(document.getElementById('geochart-colors'));
+       chart.draw(data, options);
+     };
+   </script>
+  </head>
+
+  <body id="overall">
+    <p>dwmidmwiia</p>
+  </body>
+</html>
+
 
 <div class = "map_wrapper">
 
-  <div class = "map_container">
-  </div>
 
 
 </div>
-
-{{loggedstat}}
-{% endblock %}

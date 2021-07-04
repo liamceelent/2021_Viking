@@ -2,7 +2,10 @@
 
 
 :root{
-  
+  --clr-primary: #0B0C10;
+  --clr-neutral: #C5C6C7;
+  --clr-neutral-100: #45A29E;
+  --font-family: 'Squada One', cursive;
 }
 
 body,
@@ -14,32 +17,32 @@ p {
 
 p,
 input{
-  font-family: 'Squada One', cursive;
+  font-family: var(--font-family);
 }
 
 #login, #sign{
-  background-color: rgb(11, 12, 16);
+  background-color: var(--clr-primary);
 }
 
 #overall{
-  background-color: rgb(11, 12, 16);
+  background-color: var(--clr-primary);
 }
 
 /*nabavcvcvavvavavavavavva*/
 
 .nav{
   float:left;
-  background-color: rgb(11, 12, 16);
+  background-color: var(--clr-primary);
   width:100%;
   height:7.5%;
   text-align: center;
   font-size: 3vw;
-  font-family: 'Squada One', cursive;
+  font-family: var(--font-family);
 
 }
 
 .nav a{
-  color: rgb(197, 198, 199);
+  color: var(--clr-neutral);
   margin-left:5%;
 }
 
@@ -67,13 +70,13 @@ input{
 /*loginnnnnnnnnnn*/
 
 .wrapper_login{
-  background-color: rgb(11, 12, 16);
+  background-color: var(--clr-primary);
   height: auto;
   width:auto;
 }
 
 .login_box{
-  border: 7px solid rgb(69, 162, 158);
+  border: 7px solid var(--clr-neutral-100);
   border-radius: 1vw;
   width:30%;
   height:30%;
@@ -87,12 +90,12 @@ input{
 }
 
 .login p{
-  color: rgb(197, 198, 199);
+  color: var(--clr-neutral);
   font-size:1.5vw;
 }
 
 .forgot_write p{
-  color: rgb(197, 198, 199);
+  color: var(--clr-neutral);
   font-size: 20px;
   margin: 5% 1% 0% 1%;
 }
@@ -126,7 +129,7 @@ input{
   margin: auto;
   width:100%;
   padding-top: 2vw;
-  font-family: 'Squada One', cursive;
+  font-family: var(--font-family);
 }
 
 .sign_up_btn{
@@ -139,7 +142,7 @@ input{
 }
 
 .sign_up_btn a,.forgot_btn a, .back_sign a{
-  color: rgb(197, 198, 199);
+  color: var(--clr-neutral);
   font-size: 1vw;
 }
 
@@ -148,8 +151,8 @@ input{
 }
 
 .stat_login{
-  color:rgb(197, 198, 199);
-  font-family: 'Squada One', cursive;
+  color:var(--clr-neutral);
+  font-family: var(--font-family);
 }
 
 /*mapssssssssssssssss*/
