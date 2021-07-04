@@ -47,26 +47,31 @@ input{
 }
 
 /*hommememememememme*/
-
-.axe{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 150px;
-    height: 150px;
-    margin: -60px 0 0 150px;
-    -webkit-animation: spin 2s linear infinite;
-
+.wrapper_home{
+  width:100%;
+  height: flex;
+  background-image: url("/static/image/tester2.png");
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-@-webkit-keyframes spin{
-    50%  {left: 0px; top: 0px;}
-    50%  {left: 200px; top: 200px;}
-    100%{-webkit-transform: rotate(360deg);}
+.writing_home{
+  font-family: var(--font-family);
+  color: var(--clr-neutral-200);
+  text-align: center;
+  font-size: 2vw;
+  padding: 5% 0 5% 0;
 }
 
-
-
+.writing_home p{
+  font-family: var(--font-family);
+  color: var(--clr-neutral);
+  width: 60%;
+  margin: auto;
+  padding: 10% 0 0 0;
+}
 /*loginnnnnnnnnnn*/
 
 .wrapper_login{
