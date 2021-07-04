@@ -88,10 +88,10 @@ def history():
     return render_template('history.html', page_title="history")
 
 
-@app.route('/famous')
+@app.route('/famous', methods=['POST', 'GET'])
 def famous():
-
-    return render_template('famous.html', page_title="famous")
+    famous_vikings = models.Famous_Viking.query.all()
+    return render_template('famous.html', page_title="famous", vikings = famous_vikings)
 
 
 if __name__ == "__main__":
