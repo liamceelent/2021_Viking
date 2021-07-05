@@ -2,6 +2,9 @@
 
 {% block content %}
 
-{{vikings}}
+{% for viking in vikings %}
 
+{{ viking.name }}
+<br>
+{%endfor%}
 {% endblock %}
