@@ -53,5 +53,4 @@ Visted = db.Table('Visted', db.Model.metadata,
 
 
 
-
 db.create_all()

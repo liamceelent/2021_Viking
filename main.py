@@ -15,7 +15,13 @@ import models
 
 @app.route('/')
 def home():
-    return render_template('home.html', page_title="Home")
+    if session.get('name') != None:
+        pass
+    else:
+        session['name'] = None
+    current_user = session['name']
+    print(current_user)
+    return render_template('home.html', page_title="Home", log = current_user)
 
 
 
