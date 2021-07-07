@@ -4,7 +4,20 @@
 
 {% for viking in vikings %}
 
-{{ viking.name }}
-<br>
+<div class = "viking_name">
+  <h1> name </h1>
+  <p>{{ viking.name }}</p>
+</div>
+
+<div class = "viking_kil">
+  <h2>kills</h2>
+  <p>{{ viking.kill }}</p>
+</div>
+
+<div class = "viking_desc">
+  <h2>desc</h2>
+  <p>{{ viking.description }}</p>
+</div>
+
 {%endfor%}
 {% endblock %}

@@ -93,10 +93,15 @@ def map():
 def history():
     return render_template('history.html', page_title="history")
 
+@app.route('/user')
+def user():
+
+    return render_template('user.html', page_title="user")
 
 @app.route('/famous', methods=['POST', 'GET'])
 def famous():
     famous_vikings = models.Famous_Viking.query.all()
+    print(famous_vikings)
     return render_template('famous.html', page_title="famous", vikings = famous_vikings)
 
 

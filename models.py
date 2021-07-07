@@ -35,6 +35,7 @@ class Famous_Viking(db.Model):
     wid = db.Column(db.Integer, db.ForeignKey('Weapon.id'), nullable = False)
     kill = db.Column(db.Integer)
     rating = db.Column(db.Integer)
+    description = db.Column(db.String())
 
     # def __repr__(self):
     #     return(self.id, self.name, self.age, self.fid, self.wid, self.kill, self.rating)
