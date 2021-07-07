@@ -8,6 +8,16 @@
 
 <button onclick="myFunction()">Click me</button>
 
+<div class = "profile_pic">
+
+</div>
+
+
+{% for image in images %}
+  <div class = "img_user">
+    <img src="/static/image/{{image.name}}">
+  </div>
+{% endfor %}
 
 <form method="POST">
   <input type="submit" formmethod = post value="logout" name = "logout">

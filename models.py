@@ -8,6 +8,15 @@ class User(db.Model):
     salt = db.Column(db.String(225))
     key = db.Column(db.String(225))
     coin = db.Column(db.Integer)
+    img = db.Column(db.String())
+
+class Image(db.Model):
+    __tablename__ = "Image"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(), unique=True)
+
+
+
 
 class Location(db.Model):
     __tablename__ = "Location"
@@ -36,6 +45,7 @@ class Famous_Viking(db.Model):
     kill = db.Column(db.Integer)
     rating = db.Column(db.Integer)
     description = db.Column(db.String())
+    img = db.Column(db.String())
 
     # def __repr__(self):
     #     return(self.id, self.name, self.age, self.fid, self.wid, self.kill, self.rating)
@@ -46,7 +56,7 @@ class Weapon(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
 
-Visted = db.Table('Visted', db.Model.metadata,
+Visited = db.Table('Visited', db.Model.metadata,
     db.Column('Famous_id', db.Integer, db.ForeignKey('Famous_Viking.id')),
     db.Column('Location_id', db.Integer, db.ForeignKey('Location.id'))
 )

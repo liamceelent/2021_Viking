@@ -95,16 +95,18 @@ def history():
 
 @app.route('/user', methods=['POST', 'GET'] )
 def user():
+
     if session.get('name') == None:
         return redirect(url_for("login_post"))
     current_user = session.get('name')
 
+    image = models.Image.query.all()
     if request.method == 'POST' and "logout" in request.form:
         session['name'] = None
         return redirect(url_for("home"))
 
 
-    return render_template('user.html', page_title="user", user = current_user)
+    return render_template('user.html', page_title="user", user = current_user, images = image)
 
 @app.route('/famous', methods=['POST', 'GET'])
 def famous():

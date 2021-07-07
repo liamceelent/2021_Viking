@@ -8,6 +8,7 @@
     <a href="/famous_click?viking_id={{viking.id}}">
       <div class = "wrapper_card_80">
         <div class = "img_famous">
+          <img src="/static/image/{{viking.img}}">
         </div>
         <div class = "rating">
           <p>{{ viking.rating }}</p>
@@ -18,11 +19,12 @@
 
       </div>
     </a>
-  {% elif viking.rating <= 80 %}
+  {% elif 80 > viking.rating > 60 %}
 
     <a href="/famous_click?viking_id={{viking.id}}">
       <div class = "wrapper_card_60">
         <div class = "img_famous">
+          <img src="/static/image/{{viking.img}}">
         </div>
         <div class = "rating">
           <p>{{ viking.rating }}</p>
@@ -32,6 +34,23 @@
         </div>
       </div>
     </a>
+
+  {% elif viking.rating <= 60 %}
+
+  <a href="/famous_click?viking_id={{viking.id}}">
+    <div class = "wrapper_card_0">
+      <div class = "img_famous">
+        <img src="/static/image/{{viking.img}}">
+      </div>
+      <div class = "rating">
+        <p>{{ viking.rating }}</p>
+      </div>
+      <div class = "viking_name">
+        <p>{{ viking.name }}</p>
+      </div>
+    </div>
+  </a>
+
   {% endif %}
 {%endfor%}
 {% endblock %}

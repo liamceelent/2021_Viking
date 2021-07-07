@@ -221,12 +221,14 @@ input{
 
 /* famous vikingdsiwdnqaidqwdjiqw */
 
-.viking_name p {
+.viking_name p, .rating p{
   font-family: var(--font-family);
   color: var(--clr-neutral-200);
+  font-size: 1vw;
 }
 
-.wrapper_card_80, .wrapper_card_60 {
+
+.wrapper_card_80, .wrapper_card_60, .wrapper_card_0 {
   border-radius: 0.5vw;
   width:15vw;
   height:20vw;
@@ -237,23 +239,58 @@ input{
 
 }
 
-.wrapper_card_80:hover , .wrapper_card_60:hover{
+.wrapper_card_80:hover , .wrapper_card_60:hover, .wrapper_card_0:hover{
   opacity: 0.8;
 }
-.wrapper_card_80 p, .wrapper_card_60 p{
+.wrapper_card_80 p, .wrapper_card_60 p, ..wrapper_card_0 p {
   font-size: 1vw;
 }
 
 .wrapper_card_80{
-  border: 0.5vw solid var(--clr-neutral-100);
+  border: 0.5vw solid rgb(255,215,0);
 }
 
 .wrapper_card_60{
-  border: 0.5vw solid var(--clr-neutral);
+  border: 0.5vw solid rgb(192,192,192);
 }
 
-.img_famous{
+.wrapper_card_0{
+  border: 0.5vw solid rgb(205, 127, 50);
+}
+
+.img_famous img{
   margin:5%;
-  background-color: yellow;
   height:80%;
+  width:90%;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+}
+
+/* clickkkkkkkkkkkkkkkkkkkkkkkkkkkkk */
+
+.wrapper_click{
+  width:80%;
+  height:flex;
+  text-align: center;
+  margin: auto;
+}
+
+.click_title{
+  padding: 5% 0 5% 0;
+  font-size: 5vw;
+  color: var(--clr-neutral-200);
+}
+
+/* userrrrrrrrrrrrr */
+
+
+.img_user img{
+  border-radius: 0.5vw;
+  width:15vw;
+  height:20vw;
+  left:50%;
+  text-align: center;
+  float: left;
+  margin:2%;
 }

@@ -3,8 +3,13 @@
 {% block content %}
 
 {% for stat in stats %}
-  <div class = "cool">
-    <p>{{ stat.name }}</p>
+  <div class = "wrapper_click">
+    <div class = "click_title">
+      <p>{{ stat.name }}</p>
+    </div>
+    <div class = "click_img">
+       <img src="/static/image/{{stat.img}}">
+    </div>
   </div>
 {% endfor %}
 
