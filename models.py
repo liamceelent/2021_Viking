@@ -8,7 +8,7 @@ class User(db.Model):
     salt = db.Column(db.String(225))
     key = db.Column(db.String(225))
     coin = db.Column(db.Integer)
-    img = db.Column(db.String())
+    iig = db.Column(db.Integer, db.ForeignKey('Image.id'))
 
 class Image(db.Model):
     __tablename__ = "Image"

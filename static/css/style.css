@@ -284,6 +284,14 @@ input{
 
 /* userrrrrrrrrrrrr */
 
+#hide{
+  height:100%;
+  width:100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
 
 .img_user img{
   border-radius: 0.5vw;
@@ -293,4 +301,10 @@ input{
   text-align: center;
   float: left;
   margin:2%;
+}
+
+.myClass {
+  background-color: red;
+  color: white;
+  font-size: 44px;
 }
