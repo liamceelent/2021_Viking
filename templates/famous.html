@@ -4,20 +4,34 @@
 
 {% for viking in vikings %}
 
-<div class = "viking_name">
-  <h1> name </h1>
-  <p>{{ viking.name }}</p>
-</div>
+  {% if viking.rating > 80 %}
+    <a href="/famous_click?viking_id={{viking.id}}">
+      <div class = "wrapper_card_80">
+        <div class = "img_famous">
+        </div>
+        <div class = "rating">
+          <p>{{ viking.rating }}</p>
+        </div>
+        <div class = "viking_name">
+          <p>{{ viking.name }}</p>
+        </div>
 
-<div class = "viking_kil">
-  <h2>kills</h2>
-  <p>{{ viking.kill }}</p>
-</div>
+      </div>
+    </a>
+  {% elif viking.rating <= 80 %}
 
-<div class = "viking_desc">
-  <h2>desc</h2>
-  <p>{{ viking.description }}</p>
-</div>
-
+    <a href="/famous_click?viking_id={{viking.id}}">
+      <div class = "wrapper_card_60">
+        <div class = "img_famous">
+        </div>
+        <div class = "rating">
+          <p>{{ viking.rating }}</p>
+        </div>
+        <div class = "viking_name">
+          <p>{{ viking.name }}</p>
+        </div>
+      </div>
+    </a>
+  {% endif %}
 {%endfor%}
 {% endblock %}

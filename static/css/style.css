@@ -225,3 +225,35 @@ input{
   font-family: var(--font-family);
   color: var(--clr-neutral-200);
 }
+
+.wrapper_card_80, .wrapper_card_60 {
+  border-radius: 0.5vw;
+  width:15vw;
+  height:20vw;
+  left:50%;
+  text-align: center;
+  float: left;
+  margin:2%;
+
+}
+
+.wrapper_card_80:hover , .wrapper_card_60:hover{
+  opacity: 0.8;
+}
+.wrapper_card_80 p, .wrapper_card_60 p{
+  font-size: 1vw;
+}
+
+.wrapper_card_80{
+  border: 0.5vw solid var(--clr-neutral-100);
+}
+
+.wrapper_card_60{
+  border: 0.5vw solid var(--clr-neutral);
+}
+
+.img_famous{
+  margin:5%;
+  background-color: yellow;
+  height:80%;
+}

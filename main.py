@@ -19,9 +19,8 @@ def home():
         pass
     else:
         session['name'] = None
-    current_user = session['name']
-    print(current_user)
-    return render_template('home.html', page_title="Home", log = current_user)
+    current_user = session.get('name')
+    return render_template('home.html', page_title="Home", user = current_user)
 
 
 
@@ -79,31 +78,49 @@ def sign_up_post():
 
 @app.route('/forgot')
 def forgot():
-
-    return render_template('forgot.html', page_title="forgot")
+    current_user = session.get('name')
+    return render_template('forgot.html', page_title="forgot", user = current_user)
 
 
 @app.route('/map')
 def map():
-
-    return render_template('map.html', page_title="map")
+    current_user = session.get('name')
+    return render_template('map.html', page_title="map", user = current_user)
 
 
 @app.route('/history')
 def history():
-    return render_template('history.html', page_title="history")
+    current_user = session.get('name')
+    return render_template('history.html', page_title="history", user = current_user)
 
-@app.route('/user')
+@app.route('/user', methods=['POST', 'GET'] )
 def user():
+    if session.get('name') == None:
+        return redirect(url_for("login_post"))
+    current_user = session.get('name')
 
-    return render_template('user.html', page_title="user")
+    if request.method == 'POST' and "logout" in request.form:
+        session['name'] = None
+        return redirect(url_for("home"))
+
+
+    return render_template('user.html', page_title="user", user = current_user)
 
 @app.route('/famous', methods=['POST', 'GET'])
 def famous():
     famous_vikings = models.Famous_Viking.query.all()
-    print(famous_vikings)
-    return render_template('famous.html', page_title="famous", vikings = famous_vikings)
+    current_user = session.get('name')
+    return render_template('famous.html', page_title="famous", vikings = famous_vikings, user = current_user)
 
+@app.route('/famous_click', methods=['POST', 'GET'])
+def famous_click():
+    current_user = session.get('name')
+
+    viking_id = request.args.get('viking_id')
+    print(viking_id)
+    stats = models.Famous_Viking.query.filter_by(id = viking_id).all()
+    print(stats)
+    return render_template('famous_click.html', page_title="famous", user = current_user, stats = stats)
 
 if __name__ == "__main__":
     app.run(debug=True)

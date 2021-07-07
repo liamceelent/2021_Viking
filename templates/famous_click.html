@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% for stat in stats %}
+  <div class = "cool">
+    <p>{{ stat.name }}</p>
+  </div>
+{% endfor %}
+
+{% endblock %}
