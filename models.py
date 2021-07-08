@@ -8,12 +8,13 @@ class User(db.Model):
     salt = db.Column(db.String(225))
     key = db.Column(db.String(225))
     coin = db.Column(db.Integer)
-    iig = db.Column(db.Integer, db.ForeignKey('Image.id'))
-
+    img = db.Column(db.Integer, db.ForeignKey('Image.id'))
+    image = db.relationship('Image', back_populates="user")
 class Image(db.Model):
     __tablename__ = "Image"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(), unique=True)
+    user = db.relationship('User', back_populates="image")
 
 
 
