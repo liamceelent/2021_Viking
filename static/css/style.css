@@ -19,11 +19,10 @@ p {
 p,
 input{
   font-family: var(--font-family);
+  font-size: 1vw;
 }
 
-#login, #sign{
-  background-color: var(--clr-primary);
-}
+
 
 #overall{
   background-color: var(--clr-primary);
@@ -84,10 +83,10 @@ input{
 }
 
 .login_box{
-  border: 7px solid var(--clr-neutral-100);
+  border: 0.5vw solid var(--clr-neutral-100);
   border-radius: 1vw;
-  width:30%;
-  height:30%;
+  width:30vw;
+  height:flex;
   left:50%;
   margin: 15% 0 0 35%;
   text-align: center;
@@ -95,6 +94,8 @@ input{
 
 .login{
   margin-top: 7.5%;
+  height:flex;
+  width:100%;
 }
 
 .login p{
@@ -109,13 +110,13 @@ input{
 }
 
 .login input{
-  width:75%;
-  height:10%;
+  width:23vw;
+  height:3vh;
   border-radius: 5px;
 }
 
 .wrapper_forms{
-  margin-top: 15px;
+  margin: 1.5vh 0 4vh 0;
 }
 
 .wrapper_forms input{
@@ -158,9 +159,10 @@ input{
   margin-left: 48%;
 }
 
-.stat_login{
+.stat_login p{
   color:var(--clr-neutral);
   font-family: var(--font-family);
+  font-size: 1vw;
 }
 
 /*mapssssssssssssssss*/
@@ -201,7 +203,7 @@ input{
 .writing_box{
   width:100%;
   height:flex;
-  border: 7px solid var(--clr-neutral-100);
+  border: 0.5vw solid var(--clr-neutral-100);
   border-radius: 1vw;
 }
 
