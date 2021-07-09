@@ -107,7 +107,7 @@ def user():
 
     user = models.User.query.filter_by(name = session['name']).first()
 
-    image = user.image
+    image = user.image.name
     print(image)
 
     return render_template('user.html', page_title="user", user = current_user, images = image)

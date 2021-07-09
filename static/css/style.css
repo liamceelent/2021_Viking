@@ -9,6 +9,7 @@
   --font-family: 'Squada One', cursive;
 }
 
+
 body,
 h1,
 h2,
@@ -309,4 +310,8 @@ input{
   background-color: red;
   color: white;
   font-size: 44px;
+}
+
+.profile_pic img{
+  border-radius: 50%;
 }
