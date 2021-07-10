@@ -85,7 +85,12 @@ def forgot():
 @app.route('/map')
 def map():
     current_user = session.get('name')
-    return render_template('map.html', page_title="map", user = current_user)
+
+    location = models.Location.query.all()
+
+
+
+    return render_template('map.html', page_title="map", user = current_user, country = location)
 
 
 @app.route('/history')

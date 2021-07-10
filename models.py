@@ -27,10 +27,14 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
 
+    faction = db.relationship('Location_Faction', back_populates='locations')
+
 class Faction(db.Model):
     __tablename__ = "Faction"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
+
+    location = db.relationship('Location_Faction', back_populates='factions')
 
 class Location_Faction(db.Model):
     __tablename__ = "Location_Faction"
@@ -38,6 +42,9 @@ class Location_Faction(db.Model):
     lid = db.Column(db.Integer, db.ForeignKey('Location.id'), nullable = False)
     fid = db.Column(db.Integer, db.ForeignKey('Faction.id'), nullable = False)
     period = db.Column(db.Integer)
+
+    locations = db.relationship('Location', back_populates="faction")
+    factions = db.relationship('Faction', back_populates="location")
 
 class Famous_Viking(db.Model):
     __tablename__ = "Famous_Viking"
@@ -50,10 +57,6 @@ class Famous_Viking(db.Model):
     rating = db.Column(db.Integer)
     description = db.Column(db.String())
     img = db.Column(db.String())
-
-    # def __repr__(self):
-    #     return(self.id, self.name, self.age, self.fid, self.wid, self.kill, self.rating)
-
 
 class Weapon(db.Model):
     __tablename__ = "Weapon"

@@ -20,14 +20,11 @@
          ['Country',   'sicky'],
            {% for faction in country %}
 
-            ['{{ data[0] }}', {{ data[1] }}],
+            ['{{ faction.name }}', 1],
+
           {% endfor %}
          ]);
 
-       {% for faction in country %}
-
-        ['{{ data[0] }}', {{ data[1] }}],
-      {% endfor %}
        var options = {
          region: '150', // Africa
          colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', 'white']},
@@ -37,12 +34,21 @@
        };
 
        var chart = new google.visualization.GeoChart(document.getElementById('geochart-colors'));
+
+       google.visualization.events.addListener(chart, 'select', function () {
+         var selection = chart.getSelection();
+         if (selection.length > 0) {
+           window.open("/");
+         }
+       });
+
+
        chart.draw(data, options);
      };
    </script>
   </head>
 
-  <body id ="map"
+  <body id ="map">
     {% include 'nav.html' %}
     <div id="geochart-colors"></div>
   </body>
