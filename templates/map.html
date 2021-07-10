@@ -17,10 +17,17 @@
 
      function drawRegionsMap() {
        var data = google.visualization.arrayToDataTable([
-         ['Country',   'Latitude'],
-         ['Russia', 1], ['Germany', 2], ['Italy',3], ['France', 4], ['United Kingdom', 5], ['Netherlands', 6],['Switerland', 7], ['Greece', 8], ['Poland',9], ['Austria', 10], ['Belgium', 11], ['Sweden', 12], ['Denmark', 13], ['Ukraine', 14], ['Croatia',15], ['Hungary', 16], ['Norway', 17], ['Czechia', 18],['Finland', 19], ['Malta', 20], ['Romania',21], ['Ireland', 22], ['Serbia', 23], ['Iceland', 24], ['Albania', 25], ['Belarus', 26], ['Bulgaria',27], ['North Macedonia', 28], ['Luxembourg', 29], ['Slovakia', 30],['Slovenia', 31], ['Lithuania', 32], ['Moldova',33], ['Montenegro', 34], ['Estonia', 35], ['Finland', 36], ['Latvia', 37], ['Switzerland', 38],['Czech Republic', 39],['Bosnia and Herzegovina', 40], ['Kosovo', 41], ['North Macedonia', 42],
-       ]);
+         ['Country',   'sicky'],
+           {% for faction in country %}
 
+            ['{{ data[0] }}', {{ data[1] }}],
+          {% endfor %}
+         ]);
+
+       {% for faction in country %}
+
+        ['{{ data[0] }}', {{ data[1] }}],
+      {% endfor %}
        var options = {
          region: '150', // Africa
          colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', 'white']},
@@ -35,8 +42,9 @@
    </script>
   </head>
 
-  <body>
-    <div id="geochart-colors" style="width: 100%; height: 100%;"></div>
+  <body id ="map"
+    {% include 'nav.html' %}
+    <div id="geochart-colors"></div>
   </body>
 
 </html>
