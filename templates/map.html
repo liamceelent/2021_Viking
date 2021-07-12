@@ -17,7 +17,7 @@
 
      function drawRegionsMap() {
        var data = google.visualization.arrayToDataTable([
-         ['Country',   'sicky'],
+         ['Country',   'sicky',],
            {% for faction in country %}
 
             ['{{ faction.name }}', 1],
@@ -27,7 +27,7 @@
 
        var options = {
          region: '150', // Africa
-         colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', 'white']},
+         colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', '#C5C6C7']},
          backgroundColor: '#0B0C10',
          datalessRegionColor: 'aqua',
          defaultColor: 'aqua',
@@ -38,7 +38,7 @@
        google.visualization.events.addListener(chart, 'select', function () {
          var selection = chart.getSelection();
          if (selection.length > 0) {
-           window.open("/");
+           window.location.replace("http://127.0.0.1:5000/");
          }
        });
 
@@ -49,8 +49,19 @@
   </head>
 
   <body id ="map">
+
     {% include 'nav.html' %}
+
     <div id="geochart-colors"></div>
+
+    {% for clans in clan %}
+
+      <div class = "clans">
+        <h1>{{clans.name}}</h1>
+      </div>
+
+    {% endfor %}
+
   </body>
 
 </html>

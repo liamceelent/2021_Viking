@@ -3,20 +3,20 @@
 
 {% block content %}
 
-
-  <div class = "wrapper_login">
+  <div name = "wrapper_login">
 
     <div class = "login_box">
       <div class = "login">
-        <p> Forgot password?</p>
-        <div class = "forgot_write">
-          <p>Enter the email you use to login to vikings and we'll send you a link to get you back into your account.</p>
-        </div>
+        <p>Forgot password?</p>
+        <p id = "second">please enter your email</p>
         <div class = "wrapper_forms">
           <form method="POST">
-            <input name="forgot_email" required = "required">
-            <input type="submit" formmethod = post value="Send link" id = "submit">
+            <input name="email" required = "required" placeholder="email">
+            <input type="submit" formmethod = post value="Login" id = "submit">
           </form>
+        </div>
+        <div class = "stat_login">
+          <p>{{status}}</p>
         </div>
       </div>
     </div>
@@ -30,6 +30,5 @@
     </div>
 
   </div>
-
 
 {% endblock %}
