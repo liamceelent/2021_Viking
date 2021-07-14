@@ -3,32 +3,37 @@
 
 {% block content %}
 
-  <div name = "wrapper_login">
+<div name = "wrapper_login">
 
-    <div class = "login_box">
-      <div class = "login">
-        <p>Forgot password?</p>
-        <p id = "second">please enter your email</p>
-        <div class = "wrapper_forms">
-          <form method="POST">
-            <input name="email" required = "required" placeholder="email">
-            <input type="submit" formmethod = post value="Login" id = "submit">
-          </form>
-        </div>
-        <div class = "stat_login">
-          <p>{{status}}</p>
-        </div>
+  <div class = "login_box">
+    <div class = "login">
+      <p>Forgot password?</p>
+      <p id = "second">please enter your email</p>
+      <div class = "wrapper_forms">
+        <form method="POST">
+          <input name="email" required = "required" placeholder="email">
+          <input type="submit" formmethod = post value="Login" id = "submit">
+        </form>
+      </div>
+      <div class = "stat_login">
+        <p>{{status}}</p>
       </div>
     </div>
+  </div>
 
-    <div class = "sign_up">
+  <div class = "sign_up">
 
-      <div class = "back_sign">
-        <a href="/login">Back to login</a>
-      </div>
-
+    <div class = "back_sign">
+      <a href="/login">Back to login</a>
     </div>
 
   </div>
 
+</div>
+
+  <script>
+    document.querySelector('#submit').addEventListener('click', () => {
+    document.querySelector('.wrapper_login').classList.toggle('hidden');
+  });
+  </script>
 {% endblock %}
