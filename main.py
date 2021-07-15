@@ -30,6 +30,8 @@ def home():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login_post():
+    current_user = session.get('name')
+
     if request.method == 'POST' and "name" in request.form:
 
         name = request.form['name']
@@ -51,12 +53,14 @@ def login_post():
             status = "Wrong user name or password."
             return render_template('login.html', status=status)
     else:
-        return render_template('login.html', page_title="Login")
+        return render_template('login.html', page_title="Login", user = current_user)
 
 
 
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up_post():
+    current_user = session.get('name')
+
     if request.method == 'POST' and "sign_name" in request.form:
         name = request.form['sign_name']
         password = request.form['sign_pass']
@@ -82,7 +86,7 @@ def sign_up_post():
             status = "Name is Already Taken"
             return render_template('sign.html', page_title="Sign_up",status= status)
     else:
-        return render_template('sign.html', page_title="Sign_up")
+        return render_template('sign.html', page_title="Sign_up", user = current_user)
 
 
 
@@ -93,6 +97,7 @@ def forgot():
     if request.method == 'POST' and "email" in request.form:
         email = request.form['email']
 
+        global email_check
         email_check = models.User.query.filter_by(email=email).first()
 
         if email_check is not None:
@@ -124,13 +129,16 @@ def forgot():
 def password():
 
     current_user = session.get('name')
-    print(password_change)
 
     if request.method == 'POST' and "code" in request.form:
         code = request.form['code']
-        if password_change == int(code):
-                return render_template('home.html', page_title="password", user = current_user)
 
+        if password_change == int(code):
+            current_user = models.User.query.filter_by(email=email_check).first()
+            return render_template('user.html', page_title="user", user = current_user, status = statsus)
+        else:
+            status = "wrong code"
+            return render_template('password.html', page_title="password", user = current_user, status = status)
     return render_template('password.html', page_title="password", user = current_user)
 
 
@@ -168,7 +176,7 @@ def user():
 
     image = user.image.name
 
-    return render_template('user.html', page_title="user", user = current_user, images = image)
+    return render_template('user.html', page_title="user", user = current_user, images = image, stats = user)
 
 
 
@@ -188,6 +196,11 @@ def famous_click():
     stats = models.Famous_Viking.query.filter_by(id = viking_id).all()
     print(stats)
     return render_template('famous_click.html', page_title="famous", user = current_user, stats = stats)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
