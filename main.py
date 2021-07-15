@@ -96,6 +96,8 @@ def forgot():
         email_check = models.User.query.filter_by(email=email).first()
 
         if email_check is not None:
+
+            global password_change
             password_change = randint(10000, 99999)
 
             with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
@@ -111,9 +113,26 @@ def forgot():
 
                 smtp.sendmail("limct1232@gmail.com", email, msg)
 
+            return redirect(url_for("password"))
 
+        else:
+            return render_template('forgot.html', page_title="forgot", user = current_user)
 
     return render_template('forgot.html', page_title="forgot", user = current_user)
+
+@app.route('/password', methods=['POST', 'GET'])
+def password():
+
+    current_user = session.get('name')
+    print(password_change)
+
+    if request.method == 'POST' and "code" in request.form:
+        code = request.form['code']
+        if password_change == int(code):
+                return render_template('home.html', page_title="password", user = current_user)
+
+    return render_template('password.html', page_title="password", user = current_user)
+
 
 
 @app.route('/map')
