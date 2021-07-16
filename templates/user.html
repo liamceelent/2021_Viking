@@ -6,28 +6,43 @@
 <div class = "user_wrapper">
 
   <div class = "profile_wrapper">
-    <div class = "img_user">
+    <div class = "img_user" id = "toggle">
       <div class = "profile_pic">
-        <img src="/static/image/{{images}}">
+        <img src="/static/image/{{image}}">
       </div>
     </div>
-    <button id = "toggle"> jiewidw</button>
+    <div class = pfp_options>
+      {% for images in allimage %}
+      <div class = "profile_pic_option">
+        <img src="/static/image/{{images.name}}">
+      </div>
+      {% endfor %}
+    </div>
+
   </div>
+    <button onclick="toggle()"> jiewidw</button>
+
+    <form method="POST">
+      <input type="submit" formmethod = post value="logout" name = "logout">
+    </form>
 
 </div>
 
 
 
-  <form method="POST">
-    <input type="submit" formmethod = post value="logout" name = "logout">
-  </form>
-</div>
+
+
 
 
 <script>
-  document.querySelector('#toggle').addEventListener('click', () => {
-  document.querySelector('.img_user').classList.toggle('hidden');
-});
+  function toggle() {
+    var x = document.getElementById("toggle");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
 </script>
 
 {% endblock %}

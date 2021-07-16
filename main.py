@@ -166,7 +166,7 @@ def user():
         return redirect(url_for("login_post"))
     current_user = session.get('name')
 
-    image = models.Image.query.all()
+
     if request.method == 'POST' and "logout" in request.form:
         session['name'] = None
         return redirect(url_for("home"))
@@ -175,8 +175,10 @@ def user():
 
 
     image = user.image.name
+    print(image)
+    allimage =  models.Image.query.all()
 
-    return render_template('user.html', page_title="user", user = current_user, images = image, stats = user)
+    return render_template('user.html', page_title="user", user = current_user, image = image, stats = user, allimage = allimage)
 
 
 
@@ -193,14 +195,15 @@ def famous_click():
 
     viking_id = request.args.get('viking_id')
     print(viking_id)
-    stats = models.Famous_Viking.query.filter_by(id = viking_id).all()
+    user = models.Famous_Viking.query.filter_by(id = viking_id).all()
     print(stats)
     return render_template('famous_click.html', page_title="famous", user = current_user, stats = stats)
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("404.html")
+    current_user = session.get('name')
+    return render_template("404.html", user = current_user)
 
 if __name__ == "__main__":
     app.run(debug=True)
