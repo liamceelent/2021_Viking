@@ -154,10 +154,10 @@ def map():
     return render_template('map.html', page_title="map", user = current_user, country = location, clan = viking_clans)
 
 
-@app.route('/history')
+@app.route('/question')
 def history():
     current_user = session.get('name')
-    return render_template('history.html', page_title="history", user = current_user)
+    return render_template('question.html', page_title="history", user = current_user)
 
 @app.route('/user', methods=['POST', 'GET'] )
 def user():
@@ -195,7 +195,7 @@ def famous_click():
 
     viking_id = request.args.get('viking_id')
     print(viking_id)
-    user = models.Famous_Viking.query.filter_by(id = viking_id).all()
+    stats = models.Famous_Viking.query.filter_by(id = viking_id).all()
     print(stats)
     return render_template('famous_click.html', page_title="famous", user = current_user, stats = stats)
 

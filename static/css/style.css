@@ -195,15 +195,11 @@ input{
 
 
 
-.wrapper_history{
+.wrapper_question{
   margin: 0% 0 0 10%;
   width:80%;
   height: flex;
-  background-image: url("/static/image/history.png");
-  background-repeat: no-repeat;
-  background-position:center;
-  background-size: cover;
-  background-attachment: fixed;
+
 }
 
 .writing_box{

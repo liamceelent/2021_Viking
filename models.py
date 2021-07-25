@@ -64,10 +64,15 @@ class Weapon(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
 
+
+
+
 Visited = db.Table('Visited', db.Model.metadata,
     db.Column('Famous_id', db.Integer, db.ForeignKey('Famous_Viking.id')),
     db.Column('Location_id', db.Integer, db.ForeignKey('Location.id'))
 )
+
+
 
 
 
