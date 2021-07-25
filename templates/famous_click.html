@@ -4,18 +4,18 @@
 
 {% for stat in stats %}
   <div class = "wrapper_click">
+      <div class = "click_title">
+        <p>{{ stat.name }}</p>
+      </div>
 
-    <div class = "click_title">
-      <p>{{ stat.name }}</p>
-    </div>
+      <div class = "click_img">
+         <img src="/static/image/{{stat.img}}">
+      </div>
 
-    <div class = "click_img">
-       <img src="/static/image/{{stat.img}}">
-    </div>
+      <div class = "writing">
+        <p> {{ stat.description}}
+      </div>
 
-    <div class = "writing">
-    </div>
-    
   </div>
 {% endfor %}
 

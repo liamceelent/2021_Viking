@@ -276,19 +276,32 @@ c
 .wrapper_click{
   width:80%;
   height:flex;
+  border: 0.5vw solid var(--clr-neutral-100);
   margin: auto;
+  margin-top:10%;
+  margin-bottom: 10%;
+  text-align: center;
 }
 
 .click_title{
   padding: 5% 0 5% 0;
-  font-size: 5vw;
+}
+
+.click_title p{
   color: var(--clr-neutral-200);
+  font-size: 5vw;
 }
 
 .click_img img{
   width:80%;
   height: 50%;
+  margin-bottom: 5%;
 }
+
+.writing{
+  color: var(--clr-neutral);
+}
+
 
 /* userrrrrrrrrrrrr */
 

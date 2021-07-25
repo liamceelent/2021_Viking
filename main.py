@@ -100,30 +100,35 @@ def forgot():
         global email_check
         email_check = models.User.query.filter_by(email=email).first()
 
-        if email_check is not None:
-
-            global password_change
-            password_change = randint(10000, 99999)
-
-            with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-                smtp.ehlo()
-                smtp.starttls()
-                smtp.ehlo()
-                smtp.login(EMAIL_ADDRESS,EMAIL_PASSWORD)
-
-                subject = "your a loser"
-                body = f"your new password is {password_change}"
-
-                msg = f'subject:{subject}\n\n{body}'
-
-                smtp.sendmail("limct1232@gmail.com", email, msg)
-
-            return redirect(url_for("password"))
-
+        if email_check == None:
+            return render_template('login.html')
         else:
-            return render_template('forgot.html', page_title="forgot", user = current_user)
+            if email_check is not None:
+
+                global password_change
+                password_change = randint(10000, 99999)
+
+                with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+                    smtp.ehlo()
+                    smtp.starttls()
+                    smtp.ehlo()
+                    smtp.login(EMAIL_ADDRESS,EMAIL_PASSWORD)
+
+                    subject = "your a loser"
+                    body = f"your new password is {password_change}"
+
+                    msg = f'subject:{subject}\n\n{body}'
+
+                    smtp.sendmail("limct1232@gmail.com", email, msg)
+
+                return redirect(url_for("password"))
+
+            else:
+                return render_template('forgot.html', page_title="forgot", user = current_user)
 
     return render_template('forgot.html', page_title="forgot", user = current_user)
+
+
 
 @app.route('/password', methods=['POST', 'GET'])
 def password():
@@ -134,8 +139,10 @@ def password():
         code = request.form['code']
 
         if password_change == int(code):
-            current_user = models.User.query.filter_by(email=email_check).first()
-            return render_template('user.html', page_title="user", user = current_user, status = statsus)
+            current_user = models.User.query.filter_by(email=email_check.email).first()
+            user = current_user.name
+            print(user)
+            return render_template('user.html', page_title="user", user = user)
         else:
             status = "wrong code"
             return render_template('password.html', page_title="password", user = current_user, status = status)
