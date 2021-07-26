@@ -155,10 +155,20 @@ def map():
     current_user = session.get('name')
 
     location = models.Location.query.all()
-
+    print(location)
     viking_clans = models.Faction.query.all()
-    print(viking_clans)
-    return render_template('map.html', page_title="map", user = current_user, country = location, clan = viking_clans)
+
+    faction_loaction = []
+    for i in range(len(location)):
+
+        factions = location[i].faction[0].fid
+
+        faction_loaction.append(factions)
+
+    print(faction_loaction)
+
+
+    return render_template('map.html', page_title="map", user = current_user, country = location, clan = viking_clans, faction = faction_loaction)
 
 
 @app.route('/question')

@@ -18,11 +18,13 @@
      function drawRegionsMap() {
        var data = google.visualization.arrayToDataTable([
          ['Country',   'sicky',],
-           {% for faction in country %}
-
-            ['{{ faction.name }}', 1],
+          {% for location in country %}
+          {% for fac in location.faction %}  {{ location.name }}, {{ fac }}
+            ['{{ location.name }}', '{{ fac.name }}'],
 
           {% endfor %}
+          {% endfor %}
+
          ]);
 
        var options = {
