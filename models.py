@@ -22,7 +22,6 @@ class Image(db.Model):
 
 
 
-
 class Location(db.Model):
     __tablename__ = "Location"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -64,6 +63,16 @@ class Weapon(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
 
+class Question(db.Model):
+    __tablename__ = "Question"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False)
+    question = db.Column(db.String(225), unique=True)
+    cid = db.Column(db.Integer, db.ForeignKey('Comment.id'), nullable = False)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    comment = db.Column(db.String(225), unique=True)
 
 
 
