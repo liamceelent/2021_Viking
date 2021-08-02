@@ -67,13 +67,15 @@ class Question(db.Model):
     __tablename__ = "Question"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False)
+    name = db.Column(db.String(225), unique=True)
     question = db.Column(db.String(225), unique=True)
-    cid = db.Column(db.Integer, db.ForeignKey('Comment.id'), nullable = False)
+
+    comments = db.relationship('Comment')
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     comment = db.Column(db.String(225), unique=True)
-
+    qid = db.Column(db.Integer, db.ForeignKey('Question.id'), nullable = False)
 
 
 Visited = db.Table('Visited', db.Model.metadata,

@@ -175,11 +175,10 @@ def map():
 def history():
     current_user = session.get('name')
 
-    user_question = models.Question.query.all()
-    user_question = models.Question.query.all()
-    print(user_question)
+    questions = models.Question.query.all()
 
-    return render_template('question.html', page_title="history", user = current_user)
+
+    return render_template('question.html', page_title="history", user = current_user, questions = questions)
 
 
 

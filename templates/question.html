@@ -7,6 +7,15 @@
 </div>
 <div class = "wrapper_question">
   <div class = "writing_box">
+    
+    {% for question in questions %}
+      {{ question.name }}
+
+      {% for comment in question.comments %}
+        {{ comment.comment }}
+      {% endfor %}
+
+    {% endfor %}
   </div>
 </div>
 
