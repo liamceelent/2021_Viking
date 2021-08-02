@@ -174,7 +174,15 @@ def map():
 @app.route('/question')
 def history():
     current_user = session.get('name')
+
+    user_question = models.Question.query.all()
+    user_question = models.Question.query.all()
+    print(user_question)
+
     return render_template('question.html', page_title="history", user = current_user)
+
+
+
 
 @app.route('/user', methods=['POST', 'GET'] )
 def user():
