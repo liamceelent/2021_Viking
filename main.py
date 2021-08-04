@@ -189,6 +189,12 @@ def create():
     if session.get('name') == None:
         return redirect(url_for("login_post"))
 
+    current_user = session.get('name')
+
+    user = session.get('name')
+
+    questions = models.Question.query.all()
+
     if request.method == 'POST' and "title" in request.form:
 
         user = models.User.query.filter_by(name = session['name']).first()
@@ -201,9 +207,10 @@ def create():
         db.session.add(user)
         db.session.commit()
 
-        return render_template('question.html', page_title="history")
+        questions = models.Question.query.all()
+        return render_template('question.html', page_title="question", user = current_user, questions = questions)
 
-    return render_template('create.html', page_title="history")
+    return render_template('create.html', page_title="create", user = current_user, questions = questions)
 
 @app.route('/user', methods=['POST', 'GET'] )
 def user():

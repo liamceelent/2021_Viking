@@ -191,7 +191,7 @@ input{
   /* overflow-y: hidden;
   overflow-x: hidden; */
 }
-/* history */
+/* question */
 
 
 
@@ -205,7 +205,7 @@ input{
   width:100%;
   height:flex;
   border: 0.5vw solid var(--clr-neutral-100);
-c
+
 }
 
 .writing_box p{
@@ -214,12 +214,20 @@ c
   font-size: 1vw;
 }
 
-.history_title{
+.question_title{
   font-family: var(--font-family);
   color: var(--clr-neutral-200);
   text-align: center;
   font-size: 2vw;
   padding: 5% 0 5% 0;
+}
+
+.comment{
+  background-color: yellow;
+}
+
+.comments{
+  color: yellow;
 }
 
 /* famous vikingdsiwdnqaidqwdjiqw */
@@ -370,4 +378,17 @@ c
 .four_msg h1, .four_msg h2{
   font-family: var(--font-family);
   padding:10% 0 5% 0;
+}
+
+footer p{
+  color: white;
+  width:100%;
+  float: left;
+  text-align: center;
+  background-color: black;
+  margin: 0px;
+  height:3%;
+  bottom: 0;
+  font-size: 100%;
+  padding: 0.5% 0 0 0;
 }

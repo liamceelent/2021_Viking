@@ -12,6 +12,7 @@ class User(db.Model):
     email = db.Column(db.String())
 
     image = db.relationship('Image', back_populates="user")
+    
 
 class Image(db.Model):
     __tablename__ = "Image"
@@ -69,8 +70,9 @@ class Question(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False)
     question = db.Column(db.String(225), unique=True)
     title = db.Column(db.String(225), unique=True)
-    
+
     comments = db.relationship('Comment')
+    users = db.relationship('User')
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

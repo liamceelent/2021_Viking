@@ -8,9 +8,7 @@
    <script type="text/javascript">
 
      google.charts.load('current', {
-       'packages':['geochart'],
-       // Note: you will need to get a mapsApiKey for your project.
-       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'packages':['geochart'], // google plug ins
        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
      });
      google.charts.setOnLoadCallback(drawRegionsMap);
@@ -18,7 +16,7 @@
      function drawRegionsMap() {
        var data = google.visualization.arrayToDataTable([
          ['Country',   'sicky',],
-          {% for location in country %}
+          {% for location in country %} // this is getting all coutnris and the numebr beside it
           {% for fac in location.faction %}  {{ location.name }}, {{ fac }}
             ['{{ location.name }}', '{{ fac.name }}'],
 
@@ -28,7 +26,7 @@
          ]);
 
        var options = {
-         region: '150', // Africa
+         region: '150', // euro
          colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', '#C5C6C7']},
          backgroundColor: '#0B0C10',
          datalessRegionColor: 'aqua',

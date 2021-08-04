@@ -2,19 +2,24 @@
 
 {% block content %}
 
-<div class = "history_title">
+<div class = "question_title">
   <h1> Ask a Question </h1>
 </div>
 <div class = "wrapper_question">
-  <div class = "writing_box">
-
+  <div class = "writing_box"> <!-- displays question then all comments in question -->
     {% for question in questions %}
-      {{ question.title }}{{ question.question }}
+    <div class = "question_box">
+      <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
 
       {% for comment in question.comments %}
-        {{ comment.comment }}
+        <p>{{ comment.comment }}</p>
       {% endfor %}
 
+      <button id="comment">comment</button>
+
+      <div id="comments" class="comments">commetn</div>
+
+    </div>
     {% endfor %}
   </div>
 </div>
@@ -22,6 +27,20 @@
 <div class = "form_create">
   <a href="/question/create"> create a blog</a>
 </div>
+
+<!-- script to show or dont show div -->
+<script>
+document.getElementById("comment").addEventListener("click", displayDate);
+
+function displayDate() {
+  if (document.getElementById("comments").style.visibility='none'){
+    console.log('test');
+  }
+  document.getElementById("comments").style.visibility='none';
+
+  document.getElementById("comments").style.visibility='block';
+}
+</script>
 
 {{loggedstat}}
 {% endblock %}

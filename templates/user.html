@@ -8,10 +8,10 @@
   <div class = "profile_wrapper">
     <div class = "img_user" id = "toggle">
       <div class = "profile_pic">
-        <img src="/static/image/{{image}}">
+        <img src="/static/image/{{image}}"> <!-- profile pic -->
       </div>
     </div>
-    <div class = pfp_options>
+    <div class = pfp_options> <!-- all profile pics -->
       {% for images in allimage %}
       <div class = "profile_pic_option">
         <img src="/static/image/{{images.name}}">
@@ -33,7 +33,7 @@
 
 
 
-
+<!-- toggle a div from viasble to block -->
 <script>
   function toggle() {
     var x = document.getElementById("toggle");
