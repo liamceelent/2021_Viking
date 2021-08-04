@@ -173,15 +173,37 @@ def map():
 
 @app.route('/question')
 def history():
+
+
     current_user = session.get('name')
 
-    questions = models.Question.query.all()
+    user = session.get('name')
 
+    questions = models.Question.query.all()
 
     return render_template('question.html', page_title="history", user = current_user, questions = questions)
 
 
+@app.route('/question/create', methods=['POST', 'GET'])
+def create():
+    if session.get('name') == None:
+        return redirect(url_for("login_post"))
 
+    if request.method == 'POST' and "title" in request.form:
+
+        user = models.User.query.filter_by(name = session['name']).first()
+        userid = user.id
+
+        title = request.form['title']
+        content = request.form['content']
+
+        user = models.Question(question=content, title=title, user = user.id)
+        db.session.add(user)
+        db.session.commit()
+
+        return render_template('question.html', page_title="history")
+
+    return render_template('create.html', page_title="history")
 
 @app.route('/user', methods=['POST', 'GET'] )
 def user():
@@ -221,6 +243,7 @@ def famous_click():
     print(viking_id)
     stats = models.Famous_Viking.query.filter_by(id = viking_id).all()
     print(stats)
+
     return render_template('famous_click.html', page_title="famous", user = current_user, stats = stats)
 
 

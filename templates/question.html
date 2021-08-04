@@ -7,9 +7,9 @@
 </div>
 <div class = "wrapper_question">
   <div class = "writing_box">
-    
+
     {% for question in questions %}
-      {{ question.name }}
+      {{ question.title }}{{ question.question }}
 
       {% for comment in question.comments %}
         {{ comment.comment }}
@@ -19,6 +19,9 @@
   </div>
 </div>
 
+<div class = "form_create">
+  <a href="/question/create"> create a blog</a>
+</div>
 
 {{loggedstat}}
 {% endblock %}

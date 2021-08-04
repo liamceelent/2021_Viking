@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form method="POST">
+
+<div class = "pusher">
+  <div class = "create_post_container">
+
+    <div class = "post_title_create">
+       <h1>Title</h1>
+      <input name = "title" required = "required">
+    </div>
+
+    <div class = "posts_add_container">
+      <h1>Post Content</h1>
+      <textarea name = "content" rows="4" cols="50" required = "required" ></textarea>
+
+    </div>
+
+    <div class = "post_submit">
+      <input type="submit" formmethod = post>
+    </div>
+
+    <div class = "back_form">
+      <a href="/question"> Go Back</a>
+    </div>
+    {{stat}}
+  </div>
+
+</div>
+
+</form>
+
+{% endblock %}
