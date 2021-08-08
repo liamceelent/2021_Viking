@@ -379,16 +379,3 @@ input{
   font-family: var(--font-family);
   padding:10% 0 5% 0;
 }
-
-footer p{
-  color: white;
-  width:100%;
-  float: left;
-  text-align: center;
-  background-color: black;
-  margin: 0px;
-  height:3%;
-  bottom: 0;
-  font-size: 100%;
-  padding: 0.5% 0 0 0;
-}

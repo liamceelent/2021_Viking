@@ -15,9 +15,9 @@
         <p>{{ comment.comment }}</p>
       {% endfor %}
 
-      <button id="comment">comment</button>
+      <button>comment</button>
 
-      <div id="comments" class="comments">commetn</div>
+      <div id = "comments" class="comments">commetn</div>
 
     </div>
     {% endfor %}
@@ -29,18 +29,23 @@
 </div>
 
 <!-- script to show or dont show div -->
+
 <script>
-document.getElementById("comment").addEventListener("click", displayDate);
+  function toggle(event) {
+    var x = event.target.parentElement.querySelector('.comments');
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    }
 
-function displayDate() {
-  if (document.getElementById("comments").style.visibility='none'){
-    console.log('test');
+    else {
+      x.style.display = "block";
+    }
   }
-  document.getElementById("comments").style.visibility='none';
 
-  document.getElementById("comments").style.visibility='block';
-}
+  document.querySelectorAll(".question_box button")
+    .forEach(element => element.addEventListener("click", toggle));
 </script>
+
 
 {{loggedstat}}
 {% endblock %}
