@@ -212,6 +212,9 @@ def create():
 
     return render_template('create.html', page_title="create", user = current_user, questions = questions)
 
+
+
+
 @app.route('/user', methods=['POST', 'GET'] )
 def user():
 
@@ -230,6 +233,24 @@ def user():
     image = user.image.name
     print(image)
     allimage =  models.Image.query.all()
+
+    if request.method == 'POST' and "pass_change" in request.form:
+
+        pass_change = request.form['pass_change']
+
+        user = models.User.query.filter_by(name = session['name']).first()
+
+        salt = os.urandom(32)
+        key = hashlib.pbkdf2_hmac('sha256', pass_change.encode('utf-8'), salt, 100000)
+
+        user.salt = salt
+        user.key = key
+
+        db.session.merge(user)
+        db.session.commit()
+
+
+        return render_template('question.html', page_title="question", user = current_user)
 
     return render_template('user.html', page_title="user", user = current_user, image = image, stats = user, allimage = allimage)
 
