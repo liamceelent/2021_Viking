@@ -5,6 +5,11 @@
 <div class = "question_title">
   <h1> Ask a Question </h1>
 </div>
+
+<div class = "form_create">
+  <a href="/question/create"> create a question </a>
+</div>
+
 <div class = "wrapper_question">
   <div class = "writing_box"> <!-- displays question then all comments in question -->
     {% for question in questions %}
@@ -22,10 +27,6 @@
     </div>
     {% endfor %}
   </div>
-</div>
-
-<div class = "form_create">
-  <a href="/question/create"> create a blog</a>
 </div>
 
 <!-- script to show or dont show div -->
