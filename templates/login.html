@@ -7,11 +7,12 @@
 
     <div class = "login_box">
       <div class = "login">
-        <div class = "wrapper_forms">
-          <form method="POST"> <!-- login forms -->
-            <input name="name" required = "required" placeholder="name">
-            <input name="pass"  type="password" required = "required" placeholder="password">
-            <input type="submit" formmethod = post value="Login" id = "submit">
+        <div class = "wrapper_forms"><!-- login forms -->
+          <form method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <p> {{ form.name }}</p>
+            <p> {{ form.password }} </p>
+            <input type="submit" value="Login">
           </form>
         </div>
         <div class = "stat_login">

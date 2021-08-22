@@ -10,9 +10,10 @@
       <p>Forgot password?</p>
       <p id = "second">please enter your email</p>
       <div class = "wrapper_forms">
-        <form method="POST">
-          <input name="email" required = "required" placeholder="email">
-          <input type="submit" formmethod = post value="Login" id = "submit">
+        <form method="POST" enctype="multipart/form-data">
+          {{ form.csrf_token }}
+          <p> {{ form.email }}</p>
+          <input type="submit" value="Forgot">
         </form>
       </div>
       <div class = "stat_login">

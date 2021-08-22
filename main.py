@@ -11,11 +11,14 @@ app = Flask(__name__)
 app.config.from_object(Config)  # applying all config to app
 db = SQLAlchemy(app)
 
+WTF_CSRF_ENABLED = True
+WTF_CSRF_SECRET_KEY = 'sup3r_secr3t_passw3rd'
+
 EMAIL_ADDRESS = "limct1232@gmail.com"
 EMAIL_PASSWORD = "vcquwfgmlnoobuvi"
 
 import models
-
+from forms import Login_Form, Forgot_Form
 
 @app.route('/')
 def home():
@@ -30,38 +33,45 @@ def home():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login_post():
+
+    form = Login_Form()
     current_user = session.get('name')
+    if request.method=='GET':  # did the browser ask to see the page
+        return render_template('login.html', form=form, title="Login", user = current_user)
 
-    if request.method == 'POST' and "name" in request.form:
+    else:
+        if form.validate_on_submit():
+            name = form.name.data
+            password = form.password.data
 
-        name = request.form['name']
-        password = request.form['pass']
+            name_check = models.User.query.filter_by(name=name).first()
 
-        name_check = models.User.query.filter_by(name=name).first()
-
-        if name_check is not None:
-            salt = name_check.salt
-            key = name_check.key
-            new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
-            if key == new_key:
-                session['name'] = name
-                return redirect(url_for("home"))
+            if name_check is not None:
+                salt = name_check.salt
+                key = name_check.key
+                new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
+                if key == new_key:
+                    session['name'] = name
+                    return redirect(url_for("home"))
+                else:
+                    status = "Wrong user name or password."
+                    return render_template('login.html', status=status)
             else:
                 status = "Wrong user name or password."
                 return render_template('login.html', status=status)
-        else:
-            status = "Wrong user name or password."
-            return render_template('login.html', status=status)
-    else:
-        return render_template('login.html', page_title="Login", user = current_user)
 
 
 
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up_post():
+
+    form = Forgot_Form()
     current_user = session.get('name')
 
-    if request.method == 'POST' and "sign_name" in request.form:
+    if request.method=='GET':  # did the browser ask to see the page
+        return render_template('login.html', form=form, title="Login", user = current_user)
+    else:
+
         name = request.form['sign_name']
         password = request.form['sign_pass']
         email = request.form['sign_email']
@@ -85,16 +95,18 @@ def sign_up_post():
         else:
             status = "Name is Already Taken"
             return render_template('sign.html', page_title="Sign_up",status= status)
-    else:
-        return render_template('sign.html', page_title="Sign_up", user = current_user)
 
 
 
 @app.route('/forgot', methods=['POST', 'GET'])
 def forgot():
+    form = Forgot_Form()
     current_user = session.get('name')
 
-    if request.method == 'POST' and "email" in request.form:
+    if request.method=='GET':  # did the browser ask to see the page
+        return render_template('forgot.html', form=form, title="Forgot", user = current_user)
+    else:
+
         email = request.form['email']
 
         global email_check

@@ -5,34 +5,19 @@
 
 <div class = "user_wrapper">
 
-  <div class = "profile_wrapper">
-    <div class = "img_user" id = "toggle">
-      <div class = "profile_pic">
-        <img src="/static/image/{{image}}"> <!-- profile pic -->
-      </div>
-    </div>
-    <div class = pfp_options> <!-- all profile pics -->
-      {% for images in allimage %}
-      <div class = "profile_pic_option">
-        <img src="/static/image/{{images.name}}">
-      </div>
-      {% endfor %}
-    </div>
-
-  </div>
-    <button onclick="toggle()"> jiewidw</button>
-
-    <form method="POST">
-      <input type="submit" formmethod = post value="logout" name = "logout">
-    </form>
 
   <div class = "pass_change">
-    <p> change pass </p>
+    <h1>  change pass </h1>
     <form method="POST"> <!-- login forms -->
       <input name="pass_change"  type="password" required = "required" placeholder="password">
       <input type="submit" formmethod = post value="Login" id = "submit">
     </form>
   </div>
+  <h1>  logout </h1>
+  <form method="POST">
+    <input type="submit" formmethod = post value="logout" name = "logout">
+  </form>
+
 </div>
 
 

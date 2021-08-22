@@ -245,6 +245,15 @@ input{
 .comments{
   color: yellow;
 }
+/* question create wddmwdimawodimawodiaod */
+
+border: 0.5vw solid var(--clr-neutral-100);
+border-radius: 1vw;
+width:30vw;
+height:flex;
+left:50%;
+margin: 15% 0 0 35%;
+text-align: center;
 
 /* famous vikingdsiwdnqaidqwdjiqw */
 
@@ -328,53 +337,20 @@ input{
 
 /* userrrrrrrrrrrrr */
 
-#hide{
-  height:100%;
-  width:100%;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
 .user_wrapper{
-  height:auto;
-  width:auto;
-}
-
-.profile_wrapper{
-  background-color: blue;
-  height: flex;
-  width:60%;
-  text-align: center;
+  width:80%;
+  height:flex;
   border: 0.5vw solid var(--clr-neutral-100);
   margin: auto;
-  margin-top: 5%;
-}
-
-
-.img_user img{
-  border-radius: 0.5vw;
-  width:15vw;
-  height:15vw;
-  left:50%;
+  margin-top:10%;
+  margin-bottom: 10%;
   text-align: center;
-  margin:auto;
 }
 
-
-.profile_pic img{
-  border-radius: 50%;
-}
-.profile_pic_option{
-
+.user_wrapper h1{
+  color: var(--clr-neutral);
 }
 
-.profile_pic_option img{
-  width:25%;
-  height:100%;
-
-}
 /* 4000000000000000000000000004 */
 
 .four_wrapper{
