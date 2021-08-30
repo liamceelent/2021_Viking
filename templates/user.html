@@ -8,16 +8,17 @@
 
   <div class = "pass_change">
     <h1>  change pass </h1>
-    <form method="POST"> <!-- login forms -->
-      <input name="pass_change"  type="password" required = "required" placeholder="password">
-      <input type="submit" formmethod = post value="Login" id = "submit">
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      <p> {{ form.password }} </p>
+      <input type="submit" value="Login">
     </form>
   </div>
   <h1>  logout </h1>
   <form method="POST">
     <input type="submit" formmethod = post value="logout" name = "logout">
   </form>
-
+  <p> {{ status }}
 </div>
 
 
@@ -29,10 +30,10 @@
 <script>
   function toggle() {
     var x = document.getElementById("toggle");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
+    if (x.style.display === "none") {
       x.style.display = "block";
+    } else {
+      x.style.display = "none";
     }
   }
 </script>

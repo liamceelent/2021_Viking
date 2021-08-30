@@ -238,13 +238,23 @@ input{
   padding: 5% 0 5% 0;
 }
 
-.comment{
-  background-color: yellow;
-}
-
 .comments{
   color: yellow;
+  display: none;
+  width: 10%;
+  float: left;
 }
+
+
+.comment{
+  background-color: yellow;
+  width: flex;
+
+}
+
+
+
+
 /* question create wddmwdimawodimawodiaod */
 
 border: 0.5vw solid var(--clr-neutral-100);

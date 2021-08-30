@@ -15,14 +15,23 @@
     {% for question in questions %}
     <div class = "question_box">
       <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
+      <div id = "comment" class="comment"><button>reply</button>
 
+        <form method="POST" enctype="multipart/form-data">
+          {{ form.csrf_token }}
+          <p> {{ form.comment }}</p>
+          <input type="submit" value="Login">
+        </form>
+
+      </div>
       {% for comment in question.comments %}
-        <p>{{ comment.comment }}</p>
+        <button>comments</button>
+
+        <div id = "comments" class="comments">{{ comment.comment }}</div>
+
+
+
       {% endfor %}
-
-      <button>comment</button>
-
-      <div id = "comments" class="comments">commetn</div>
 
     </div>
     {% endfor %}

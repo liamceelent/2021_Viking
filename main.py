@@ -18,7 +18,7 @@ EMAIL_ADDRESS = "limct1232@gmail.com"
 EMAIL_PASSWORD = "vcquwfgmlnoobuvi"
 
 import models
-from forms import Login_Form, Forgot_Form
+from forms import Login_Form, Forgot_Form, Sign_Form, Change_Form, Comment_Form
 
 @app.route('/')
 def home():
@@ -55,26 +55,26 @@ def login_post():
                     return redirect(url_for("home"))
                 else:
                     status = "Wrong user name or password."
-                    return render_template('login.html', status=status)
+                    return render_template('login.html', status=status, form=form)
             else:
                 status = "Wrong user name or password."
-                return render_template('login.html', status=status)
+                return render_template('login.html', status=status, form=form)
 
 
 
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up_post():
 
-    form = Forgot_Form()
+    form = Sign_Form()
     current_user = session.get('name')
 
     if request.method=='GET':  # did the browser ask to see the page
-        return render_template('login.html', form=form, title="Login", user = current_user)
+        return render_template('sign.html', form=form, title="Login", user = current_user)
     else:
 
-        name = request.form['sign_name']
-        password = request.form['sign_pass']
-        email = request.form['sign_email']
+        name = form.name.data
+        password = form.password.data
+        email = form.email.data
 
         name_check = models.User.query.filter_by(name=name).first()
         email_check = models.User.query.filter_by(email=email).first()
@@ -91,10 +91,10 @@ def sign_up_post():
                 return redirect(url_for("home"))
             else:
                 status = "Email is Already Taken"
-                return render_template('sign.html', page_title="Sign_up",status= status)
+                return render_template('sign.html', page_title="Sign_up",status= status, form=form)
         else:
             status = "Name is Already Taken"
-            return render_template('sign.html', page_title="Sign_up",status= status)
+            return render_template('sign.html', page_title="Sign_up",status= status, form=form)
 
 
 
@@ -154,7 +154,8 @@ def password():
             current_user = models.User.query.filter_by(email=email_check.email).first()
             user = current_user.name
             print(user)
-            return render_template('user.html', page_title="user", user = user)
+            form = Change_Form()
+            return render_template('user.html', page_title="user", user = user, form= form)
         else:
             status = "wrong code"
             return render_template('password.html', page_title="password", user = current_user, status = status)
@@ -188,12 +189,16 @@ def history():
 
 
     current_user = session.get('name')
+    form = Comment_Form()
 
-    user = session.get('name')
+    if request.method=='GET':  # did the browser ask to see the page
+        questions = models.Question.query.all()
+        return render_template('question.html', form=form, title="Question", user = current_user, questions = questions)
+    else:
 
-    questions = models.Question.query.all()
+        questions = models.Question.query.all()
 
-    return render_template('question.html', page_title="history", user = current_user, questions = questions)
+        return render_template('question.html', page_title="history", user = current_user, questions = questions)
 
 
 @app.route('/question/create', methods=['POST', 'GET'])
@@ -234,35 +239,33 @@ def user():
         return redirect(url_for("login_post"))
     current_user = session.get('name')
 
-
-    if request.method == 'POST' and "logout" in request.form:
-        session['name'] = None
-        return redirect(url_for("home"))
-
+    form = Change_Form()
     user = models.User.query.filter_by(name = session['name']).first()
 
+    if request.method=='GET':  # did the browser ask to see the page
+        return render_template('user.html', form=form, title="User", user = current_user, stats = user)
 
-    image = user.image.name
-    print(image)
-    allimage =  models.Image.query.all()
+    else:
+        if request.method == 'POST' and "logout" in request.form:
+            session['name'] = None
+            return redirect(url_for("home"))
 
-    if request.method == 'POST' and "pass_change" in request.form:
+        elif form.validate_on_submit():
+            password = form.password.data
 
-        pass_change = request.form['pass_change']
+            user = models.User.query.filter_by(name = session['name']).first()
 
-        user = models.User.query.filter_by(name = session['name']).first()
+            salt = os.urandom(32)
+            key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
 
-        salt = os.urandom(32)
-        key = hashlib.pbkdf2_hmac('sha256', pass_change.encode('utf-8'), salt, 100000)
+            user.salt = salt
+            user.key = key
 
-        user.salt = salt
-        user.key = key
+            db.session.merge(user)
+            db.session.commit()
 
-        db.session.merge(user)
-        db.session.commit()
-
-
-        return render_template('question.html', page_title="question", user = current_user)
+            chan = "ture"
+            return render_template('user.html', page_title="user", user = current_user, form = form, status = chan)
 
     return render_template('user.html', page_title="user", user = current_user, image = image, stats = user, allimage = allimage)
 

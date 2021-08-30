@@ -21,5 +21,16 @@ class Login_Form(FlaskForm):
   name = TextField('name', validators=[DataRequired()])
   password = TextField('password', validators=[DataRequired()])
 
+class Sign_Form(FlaskForm):
+  name = TextField('name', validators=[DataRequired()])
+  password = TextField('password', validators=[DataRequired()])
+  email = TextField('password', validators=[DataRequired()])
+
 class Forgot_Form(FlaskForm):
   email = TextField('email', validators=[DataRequired()])
+
+class Change_Form(FlaskForm):
+  password = TextField('password', validators=[DataRequired()])
+
+class Comment_Form(FlaskForm):
+  comment = TextField('comment', validators=[DataRequired()])

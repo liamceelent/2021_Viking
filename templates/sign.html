@@ -8,11 +8,12 @@
       <div class = "login">
         <p> Create an account.</p>
         <div class = "wrapper_forms">
-          <form method="POST"> <!-- sign in forms -->
-            <input name="sign_name" required = "required" placeholder="name">
-            <input name="sign_pass" type="password" required = "required" placeholder="password">
-            <input name="sign_email" required = "required" type="email" placeholder="email">
-            <input type="submit" formmethod = post value="Sign up" id = "submit">
+          <form method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <p> {{ form.name }}</p>
+            <p> {{ form.password }} </p>
+            <p> {{ form.email }} </p>
+            <input type="submit" value="Login">
           </form>
         </div>
         <div class = "stat_login">
