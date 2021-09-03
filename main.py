@@ -163,28 +163,30 @@ def password():
 
 
 
-@app.route('/map')
+@app.route('/map', methods=['POST', 'GET'])
 def map():
-    current_user = session.get('name')
 
-    location = models.Location.query.all()
-    print(location)
-    viking_clans = models.Faction.query.all()
+    if request.method=='GET':
+        current_user = session.get('name')
+        period = 1
 
-    faction_loaction = []
-    for i in range(len(location)):
+        locations  = models.Location.query.all()
+        location = []
+        for i in range(len(locations)):
+            location.append(locations[i].name)
+        print(location)
 
-        factions = location[i].faction[0].fid
+        factions = models.Location_Faction.query.filter_by(period = period).all()
+        faction= []
+        for i in range(len(factions)):
+            faction.append(factions[i].fid)
+        print(faction)
+        return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction)
+    else:
+        i = request.form.get("period")
 
-        faction_loaction.append(factions)
 
-    print(faction_loaction)
-
-
-    return render_template('map.html', page_title="map", user = current_user, country = location, clan = viking_clans, faction = faction_loaction)
-
-
-@app.route('/question')
+@app.route('/question', methods=['POST', 'GET'])
 def history():
 
 
@@ -197,6 +199,10 @@ def history():
     else:
 
         questions = models.Question.query.all()
+
+        comment = form.comment.data
+
+
 
         return render_template('question.html', page_title="history", user = current_user, questions = questions)
 

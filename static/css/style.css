@@ -348,18 +348,37 @@ text-align: center;
 /* userrrrrrrrrrrrr */
 
 .user_wrapper{
-  width:80%;
+  width:30%;
   height:flex;
   border: 0.5vw solid var(--clr-neutral-100);
   margin: auto;
   margin-top:10%;
   margin-bottom: 10%;
   text-align: center;
+  border-radius: 1vw;
+  padding: 2.5%;
 }
 
 .user_wrapper h1{
   color: var(--clr-neutral);
 }
+
+.logout input{
+  width:50%;
+  height:6%;
+  border-radius: 0.2vw;
+  font-size: 200%;
+}
+
+.logout input:hover{
+  opacity: 0.6;
+}
+.pass_change input{
+
+  border-radius: 0.2vw;
+}
+
+
 
 /* 4000000000000000000000000004 */
 

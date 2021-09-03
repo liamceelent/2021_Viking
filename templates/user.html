@@ -5,20 +5,21 @@
 
 <div class = "user_wrapper">
 
-
+  <h1> user info </h1>
   <div class = "pass_change">
-    <h1>  change pass </h1>
+    <h1>  Change Password </h1>
     <form method="POST" enctype="multipart/form-data">
       {{ form.csrf_token }}
       <p> {{ form.password }} </p>
       <input type="submit" value="Login">
     </form>
   </div>
-  <h1>  logout </h1>
-  <form method="POST">
-    <input type="submit" formmethod = post value="logout" name = "logout">
-  </form>
-  <p> {{ status }}
+  <div class = "logout">
+    <form method="POST">
+      <input type="submit" formmethod = post value="logout" name = "logout">
+    </form>
+    <p> {{ status }}
+  </div>
 </div>
 
 

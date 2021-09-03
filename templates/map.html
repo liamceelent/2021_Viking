@@ -16,11 +16,10 @@
      function drawRegionsMap() {
        var data = google.visualization.arrayToDataTable([
          ['Country',   'sicky',],
-          {% for location in country %} // this is getting all coutnris and the numebr beside it
-          {% for fac in location.faction %}  {{ location.name }}, {{ fac }}
-            ['{{ location.name }}', '{{ fac.name }}'],
 
-          {% endfor %}
+          {% for i in range(location|length) %} // this is getting all coutnris and the numebr beside it
+            ['{{ location[i] }}', {{ faction[i] }}],
+
           {% endfor %}
 
          ]);
@@ -46,7 +45,8 @@
        chart.draw(data, options);
      };
    </script>
-  </head>
+
+
 
   <body id ="map">
 
@@ -54,10 +54,23 @@
 
     <div id="geochart-colors"></div>
 
+    <form method="POST">
+       <select name="period" id="period">
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+
+       </select>
+       <input type="submit" id="submit"></input>
+     </form>
+
+   </head>
     {% for clans in clan %}
 
       <div class = "clans">
-        <h1>{{clans.name}}</h1>
+        <h1>{{clans.name}} {{clans.id}}</h1>
       </div>
 
     {% endfor %}
