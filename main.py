@@ -200,7 +200,6 @@ def map():
         return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction)
 
 
-
 @app.route('/question', methods=['POST', 'GET'])
 def history():
 
