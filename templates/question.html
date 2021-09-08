@@ -17,10 +17,10 @@
       <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
       <div id = "comment" class="comment"><button>reply</button>
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}">
           {{ form.csrf_token }}
           <p> {{ form.comment }}</p>
-          <input type="submit" value="Login">
+          <input type="submit" value="comment">
         </form>
 
       </div>

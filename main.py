@@ -174,16 +174,31 @@ def map():
         location = []
         for i in range(len(locations)):
             location.append(locations[i].name)
-        print(location)
+
 
         factions = models.Location_Faction.query.filter_by(period = period).all()
         faction= []
         for i in range(len(factions)):
             faction.append(factions[i].fid)
-        print(faction)
+
         return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction)
     else:
-        i = request.form.get("period")
+        period = request.form.get("period")
+        current_user = session.get('name')
+
+        locations  = models.Location.query.all()
+        location = []
+        for i in range(len(locations)):
+            location.append(locations[i].name)
+
+
+        factions = models.Location_Faction.query.filter_by(period = period).all()
+        faction= []
+        for i in range(len(factions)):
+            faction.append(factions[i].fid)
+
+        return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction)
+
 
 
 @app.route('/question', methods=['POST', 'GET'])
@@ -232,6 +247,11 @@ def create():
 
         questions = models.Question.query.all()
         return render_template('question.html', page_title="question", user = current_user, questions = questions)
+
+    return render_template('create.html', page_title="create", user = current_user, questions = questions)
+
+@app.route('/question/{{ question.id }}', methods=['POST', 'GET'])
+def create_comment():
 
     return render_template('create.html', page_title="create", user = current_user, questions = questions)
 
