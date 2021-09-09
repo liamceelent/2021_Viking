@@ -249,9 +249,12 @@ def create():
 
     return render_template('create.html', page_title="create", user = current_user, questions = questions)
 
-@app.route('/question/{{ question.id }}', methods=['POST', 'GET'])
-def create_comment():
 
+@app.route('/comment/<id>', methods=['POST', 'GET'])
+def create_comment(id):
+    form = Comment_Form()
+
+    print(form.comment.data)
     return render_template('create.html', page_title="create", user = current_user, questions = questions)
 
 
