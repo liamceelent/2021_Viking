@@ -187,10 +187,13 @@ input{
   height: 100%;
 }
 
-#map{
-  /* overflow-y: hidden;
-  overflow-x: hidden; */
+
+.clans{
+  margin-bottom: -50;
+
 }
+
+
 /* question */
 
 
@@ -257,13 +260,6 @@ input{
 
 /* question create wddmwdimawodimawodiaod */
 
-border: 0.5vw solid var(--clr-neutral-100);
-border-radius: 1vw;
-width:30vw;
-height:flex;
-left:50%;
-margin: 15% 0 0 35%;
-text-align: center;
 
 /* famous vikingdsiwdnqaidqwdjiqw */
 
@@ -342,6 +338,7 @@ text-align: center;
 
 .writing{
   color: var(--clr-neutral);
+  padding:5% 5% 5% 5%;
 }
 
 

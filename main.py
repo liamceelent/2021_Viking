@@ -169,6 +169,7 @@ def map():
     if request.method=='GET':
         current_user = session.get('name')
         period = 1
+        clans  = models.Faction.query.all()
 
         locations  = models.Location.query.all()
         location = []
@@ -181,7 +182,7 @@ def map():
         for i in range(len(factions)):
             faction.append(factions[i].fid)
 
-        return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction)
+        return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction,clan=clans)
     else:
         period = request.form.get("period")
         current_user = session.get('name')
@@ -254,8 +255,13 @@ def create():
 def create_comment(id):
     form = Comment_Form()
 
-    print(form.comment.data)
-    return render_template('create.html', page_title="create", user = current_user, questions = questions)
+
+    user = models.Comment(comment=form.comment.data, qid=id)
+    db.session.add(user)
+    db.session.commit()
+
+    questions = models.Question.query.all()
+    return render_template('question.html', page_title="create",  questions = questions, form=form)
 
 
 

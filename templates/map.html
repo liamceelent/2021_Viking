@@ -15,7 +15,7 @@
 
      function drawRegionsMap() {
        var data = google.visualization.arrayToDataTable([
-         ['Country',   'sicky',],
+         ['Country',   'Faction',],
 
           {% for i in range(location|length) %} // this is getting all coutnris and the numebr beside it
             ['{{ location[i] }}', {{ faction[i] }}],
@@ -67,6 +67,7 @@
      </form>
 
    </head>
+   <div class="clans">
     {% for clans in clan %}
 
       <div class = "clans">
@@ -74,7 +75,7 @@
       </div>
 
     {% endfor %}
-
+  </div>
   </body>
 
 </html>
