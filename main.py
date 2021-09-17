@@ -210,11 +210,15 @@ def history():
 
     if request.method=='GET':  # did the browser ask to see the page
         questions = models.Question.query.all()
+        for question in questions:
+            print(question.comments)
+
         return render_template('question.html', form=form, title="Question", user = current_user, questions = questions)
     else:
 
         questions = models.Question.query.all()
-
+        for question in questions:
+            print(question.comment)
         comment = form.comment.data
 
 

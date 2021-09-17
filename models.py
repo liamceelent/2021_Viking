@@ -12,7 +12,7 @@ class User(db.Model):
     email = db.Column(db.String())
 
     image = db.relationship('Image', back_populates="user")
-    
+
 
 class Image(db.Model):
     __tablename__ = "Image"
@@ -22,7 +22,6 @@ class Image(db.Model):
     user = db.relationship('User', back_populates="image")
 
 
-
 class Location(db.Model):
     __tablename__ = "Location"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -30,12 +29,14 @@ class Location(db.Model):
 
     faction = db.relationship('Location_Faction', back_populates='locations')
 
+
 class Faction(db.Model):
     __tablename__ = "Faction"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
 
     location = db.relationship('Location_Faction', back_populates='factions')
+
 
 class Location_Faction(db.Model):
     __tablename__ = "Location_Faction"
@@ -46,6 +47,7 @@ class Location_Faction(db.Model):
 
     locations = db.relationship('Location', back_populates="faction")
     factions = db.relationship('Faction', back_populates="location")
+
 
 class Famous_Viking(db.Model):
     __tablename__ = "Famous_Viking"
@@ -59,10 +61,24 @@ class Famous_Viking(db.Model):
     description = db.Column(db.String())
     img = db.Column(db.String())
 
+
 class Weapon(db.Model):
     __tablename__ = "Weapon"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
+
+
+class Comment(db.Model):
+    __tablename__ = "Comment"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    comment = db.Column(db.String(225), unique=True)
+    qid = db.Column(db.Integer, db.ForeignKey('Question.id'), nullable = False)
+
+    question = db.relationship('Question', back_populates = 'comments')
+
+    def __repr__(self):
+        return self.comment
+
 
 class Question(db.Model):
     __tablename__ = "Question"
@@ -71,13 +87,8 @@ class Question(db.Model):
     question = db.Column(db.String(225), unique=True)
     title = db.Column(db.String(225), unique=True)
 
-    comments = db.relationship('Comment')
+    comments = db.relationship('Comment', back_populates='question')
     users = db.relationship('User')
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    comment = db.Column(db.String(225), unique=True)
-    qid = db.Column(db.Integer, db.ForeignKey('Question.id'), nullable = False)
 
 
 Visited = db.Table('Visited', db.Model.metadata,
