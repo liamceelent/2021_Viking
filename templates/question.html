@@ -24,11 +24,13 @@
         </form>
 
       </div>
-      {% for comment in question.comments %}
         <button>comments</button>
+        <div id = "comments" class="comments">
+          {% for comment in question.comments %}
 
-        <div id = "comments" class="comments">{{ comment.comment }}</div>
-        <div id = "{{comment}}"></div>
+          <p>{{ comment.comment }}<p>
+        </div>
+
 
 
       {% endfor %}

@@ -9,12 +9,31 @@
       </div>
 
       <div class = "click_img">
-         <img src="/static/image/{{stat.img}}"> 
+         <img src="/static/image/{{stat.img}}">
       </div>
 
+      <table id="vikings">
+        <tr>
+          <th>kills</th>
+          <th>{{stat.kill}}</th>
+        </tr>
+        <tr>
+          <td>age</td>
+          <td>{{stat.age}}</td>
+        </tr>
+        <tr>
+          <td>rating</td>
+          <td>{{stat.rating}}</td>
+        </tr>
+
+
+      </table>
+
       <div class = "writing">
-        <p> {{ stat.description}}
+        <p> {{ stat.description}} </p>
       </div>
+
+    
 
   </div>
 {% endfor %}

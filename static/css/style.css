@@ -341,6 +341,19 @@ input{
   padding:5% 5% 5% 5%;
 }
 
+#vikings, td,th{
+  background-color: var(--clr-neutral-200);
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#vikings{
+  height:10%;
+  width:30%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* userrrrrrrrrrrrr */
 
