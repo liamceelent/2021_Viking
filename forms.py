@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, TextField, TextAreaField, SelectField
+from wtforms import IntegerField, TextField, TextAreaField, SelectField, PasswordField
 from wtforms.validators import DataRequired, Optional, ValidationError
 import models
 from datetime import datetime
@@ -19,7 +19,7 @@ class Add_Movie(FlaskForm):
 
 class Login_Form(FlaskForm):
   name = TextField('name', validators=[DataRequired()])
-  password = TextField('password', validators=[DataRequired()])
+  password = PasswordField('password', validators=[DataRequired()])
 
 class Sign_Form(FlaskForm):
   name = TextField('name', validators=[DataRequired()])

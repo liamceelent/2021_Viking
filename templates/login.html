@@ -11,8 +11,8 @@
         <div class = "wrapper_forms"><!-- login forms -->
           <form method="POST" enctype="multipart/form-data">
             {{ form.csrf_token }}
-            <p> {{ form.name }}</p>
-            <p> {{ form.password }} </p>
+            <p> {{ form.name(placeholder="username") }}</p>
+            <p> {{ form.password(placeholder="password") }} </p>
             <input type="submit" value="Login">
           </form>
         </div>
