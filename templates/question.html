@@ -25,9 +25,9 @@
 
       </div>
         <button>comments</button>
-        <div id = "comments" class="comments">
-          {% for comment in question.comments %}
 
+          {% for comment in question.comments %}
+          <div id = "comments" class="comments">
           <p>{{ comment.comment }}<p>
         </div>
 
@@ -44,14 +44,16 @@
 
 <script>
   function toggle(event) {
-    var x = event.target.parentElement.querySelector('.comments');
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    }
+    event.target.parentElement.querySelectorAll('.comments').forEach((element) => {
+      if (element.style.display === "block") {
+        element.style.display = "none";
+      }
 
-    else {
-      x.style.display = "block";
-    }
+      else {
+        element.style.display = "block";
+      }
+    });
+
   }
 
   document.querySelectorAll(".question_box button")
