@@ -17,13 +17,14 @@
       <div class = "splitter">
         <p>{{question.users.name}}</p>
         <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
-        <div id = "reply" class="reply"><button>reply</button>
+        <button>reply</button>
+        <div id = "reply" class="reply">
           <div class = "reply_forms">
-          <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}">
-            {{ form.csrf_token }}
-            <p> {{ form.comment }} </p>
-            <input type="submit" value="comment">
-          </form>
+            <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}">
+              {{ form.csrf_token }}
+              <p> {{ form.comment }} </p>
+              <input type="submit" value="comment">
+            </form>
           </div>
         </div>
       </div>
@@ -35,10 +36,11 @@
         <div id = "comments" class="comments">
           <div class ="comment_section"> <p>{{ comment.comment }}</p></div>
         </div>
+        {% endfor %}
       </div>
 
 
-      {% endfor %}
+
 
     </div>
     {% endfor %}
@@ -48,7 +50,8 @@
 <!-- script to show or dont show div -->
 
 <script>
-  function toggle(event) {
+  function toggle1(event) {
+    console.log("comment")
     event.target.parentElement.querySelectorAll('.comments').forEach((element) => {
       if (element.style.display === "block") {
         element.style.display = "none";
@@ -62,11 +65,13 @@
   }
 
   document.querySelectorAll(".splitter_2 button")
-    .forEach(element => element.addEventListener("click", toggle));
+    .forEach(element => element.addEventListener("click", toggle1));
 
 
   function toggle(event) {
-    event.target.parentElement.querySelectorAll('.reply').forEach((element) => {
+    console.log("reply")
+    event.target.parentElement.querySelectorAll('.reply_forms').forEach((element) => {
+      console.log("test",element)
       if (element.style.display === "block") {
         element.style.display = "none";
       }
@@ -75,7 +80,6 @@
         element.style.display = "block";
       }
     });
-
   }
 
   document.querySelectorAll(".splitter button")

@@ -196,7 +196,7 @@ input{
 }
 .clans{
   margin-bottom: -50;
-  
+
 }
 
 
@@ -249,8 +249,9 @@ input{
 
 .comments{
   display: none;
-  width: 10%;
-  float: left;
+  width: 1%;
+  margin: 15%;
+
 }
 
 .reply_forms{
@@ -265,7 +266,7 @@ input{
 
 }
 
-.question_box{
+.writing_box{
   width:60%;
   height:flex;
   text-align: center;
