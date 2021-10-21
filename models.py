@@ -7,19 +7,7 @@ class User(db.Model):
     name = db.Column(db.String(225), unique=True)
     salt = db.Column(db.String(225))
     key = db.Column(db.String(225))
-    coin = db.Column(db.Integer, default = 0)
-    img = db.Column(db.Integer, db.ForeignKey('Image.id'), default = 1)
     email = db.Column(db.String())
-
-    image = db.relationship('Image', back_populates="user")
-
-
-class Image(db.Model):
-    __tablename__ = "Image"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(), unique=True)
-
-    user = db.relationship('User', back_populates="image")
 
 
 class Location(db.Model):

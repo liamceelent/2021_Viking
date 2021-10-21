@@ -14,23 +14,28 @@
   <div class = "writing_box"> <!-- displays question then all comments in question -->
     {% for question in questions %}
     <div class = "question_box">
-      <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
-      <div id = "comment" class="comment"><button>reply</button>
-
-        <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}">
-          {{ form.csrf_token }}
-          <p> {{ form.comment }} </p>
-          <input type="submit" value="comment">
-        </form>
-
-      </div>
-        <button>comments</button>
-        <div id = "comments" class="comments">
-          {% for comment in question.comments %}
-
-          <p>{{ comment.comment }}<p>
+      <div class = "splitter">
+        <p>{{question.users.name}}</p>
+        <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
+        <div id = "reply" class="reply"><button>reply</button>
+          <div class = "reply_forms">
+          <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}">
+            {{ form.csrf_token }}
+            <p> {{ form.comment }} </p>
+            <input type="submit" value="comment">
+          </form>
+          </div>
         </div>
+      </div>
+      <div class = "splitter_2">
+        <button>comments</button>
 
+        {% for comment in question.comments %}
+
+        <div id = "comments" class="comments">
+          <div class ="comment_section"> <p>{{ comment.comment }}</p></div>
+        </div>
+      </div>
 
 
       {% endfor %}
@@ -44,17 +49,36 @@
 
 <script>
   function toggle(event) {
-    var x = event.target.parentElement.querySelector('.comments');
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    }
+    event.target.parentElement.querySelectorAll('.comments').forEach((element) => {
+      if (element.style.display === "block") {
+        element.style.display = "none";
+      }
 
-    else {
-      x.style.display = "block";
-    }
+      else {
+        element.style.display = "block";
+      }
+    });
+
   }
 
-  document.querySelectorAll(".question_box button")
+  document.querySelectorAll(".splitter_2 button")
+    .forEach(element => element.addEventListener("click", toggle));
+
+
+  function toggle(event) {
+    event.target.parentElement.querySelectorAll('.reply').forEach((element) => {
+      if (element.style.display === "block") {
+        element.style.display = "none";
+      }
+
+      else {
+        element.style.display = "block";
+      }
+    });
+
+  }
+
+  document.querySelectorAll(".splitter button")
     .forEach(element => element.addEventListener("click", toggle));
 </script>
 

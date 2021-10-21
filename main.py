@@ -192,13 +192,14 @@ def map():
         for i in range(len(locations)):
             location.append(locations[i].name)
 
+        clans  = models.Faction.query.all()
 
         factions = models.Location_Faction.query.filter_by(period = period).all()
         faction= []
         for i in range(len(factions)):
             faction.append(factions[i].fid)
 
-        return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction)
+        return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction,clan=clans)
 
 
 @app.route('/question', methods=['POST', 'GET'])
