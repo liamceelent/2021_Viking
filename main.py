@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 WTF_CSRF_ENABLED = True
 WTF_CSRF_SECRET_KEY = 'sup3r_secr3t_passw3rd'
 
-EMAIL_ADDRESS = "limct1232@gmail.com"
+EMAIL_ADDRESS = "limct1232@gmail.com" # for sending email account
 EMAIL_PASSWORD = "vcquwfgmlnoobuvi"
 
 import models
@@ -24,7 +24,7 @@ from forms import Login_Form, Forgot_Form, Sign_Form, Change_Form, Comment_Form
 
 @app.route('/')
 def home():
-    if session.get('name') != None:
+    if session.get('name') != None: # checking if user is logged in or not
         pass
     else:
         session['name'] = "Guest"
@@ -46,15 +46,15 @@ def login_post():
             name = form.name.data
             password = form.password.data
 
-            name_check = models.User.query.filter_by(name=name).first()
+            name_check = models.User.query.filter_by(name=name).first() # seeing if name is in databse
 
             if name_check is not None:
                 salt = name_check.salt
                 key = name_check.key
-                new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
+                new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000) # hashing password to check
                 if key == new_key:
                     session['name'] = name
-                    return redirect(url_for("home"))
+                    return redirect(url_for("login_post"))
                 else:
                     status = "Wrong user name or password."
                     return render_template('login.html', status=status, form=form)
@@ -78,13 +78,13 @@ def sign_up_post():
         password = form.password.data
         email = form.email.data
 
-        name_check = models.User.query.filter_by(name=name).first()
+        name_check = models.User.query.filter_by(name=name).first() #seeing if name or email is in databse
         email_check = models.User.query.filter_by(email=email).first()
 
         if name_check is None:
             if email_check is None:
                 salt = os.urandom(32)
-                key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
+                key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000) # hashing salting
 
                 user = models.User(name=name, salt=salt, key=key, email=email)
                 db.session.add(user)
@@ -102,45 +102,47 @@ def sign_up_post():
 
 @app.route('/forgot', methods=['POST', 'GET'])
 def forgot():
+
     form = Forgot_Form()
     current_user = session.get('name')
 
     if request.method=='GET':  # did the browser ask to see the page
         return render_template('forgot.html', form=form, title="Forgot", user = current_user)
     else:
+        if form.validate_on_submit():
+            form = Forgot_Form()
+            email = form.email.data
 
-        email = request.form['email']
+            global email_check # check if email is in database
+            email_check = models.User.query.filter_by(email=email).first()
 
-        global email_check
-        email_check = models.User.query.filter_by(email=email).first()
-
-        if email_check == None:
-            return render_template('login.html')
-        else:
-            if email_check is not None:
-
-                global password_change
-                password_change = randint(10000, 99999)
-
-                with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-                    smtp.ehlo()
-                    smtp.starttls()
-                    smtp.ehlo()
-                    smtp.login(EMAIL_ADDRESS,EMAIL_PASSWORD)
-
-                    subject = "your a loser"
-                    body = f"your new password is {password_change}"
-
-                    msg = f'subject:{subject}\n\n{body}'
-
-                    smtp.sendmail("limct1232@gmail.com", email, msg)
-
-                return redirect(url_for("password"))
-
+            if email_check == None:
+                return redirect(url_for("login_post"))
             else:
-                return render_template('forgot.html', page_title="forgot", user = current_user)
+                if email_check is not None:
 
-    return render_template('forgot.html', page_title="forgot", user = current_user)
+                    global password_change # storing the change password
+                    password_change = randint(10000, 99999)
+
+                    with smtplib.SMTP('smtp.gmail.com', 587) as smtp: #how i send email
+                        smtp.ehlo()
+                        smtp.starttls()
+                        smtp.ehlo()
+                        smtp.login(EMAIL_ADDRESS,EMAIL_PASSWORD) # email and password for the email i set up also at top of code
+
+                        subject = "your a loser"
+                        body = f"your new password is {password_change}" # password code
+
+                        msg = f'subject:{subject}\n\n{body}' # the message in the email
+
+                        smtp.sendmail("limct1232@gmail.com", email, msg)
+
+                    return redirect(url_for("password"))
+
+                else:
+                    form = Forgot_Form()
+                    return render_template('forgot.html', page_title="forgot", user = current_user, form=form)
+
 
 
 
@@ -148,9 +150,9 @@ def forgot():
 def password():
 
     current_user = session.get('name')
-
+    form = Change_Form()
     if request.method == 'POST' and "code" in request.form:
-        code = request.form['code']
+        code = request.form['code'] # code that they enetered
 
         if password_change == int(code):
             current_user = models.User.query.filter_by(email=email_check.email).first()
@@ -159,7 +161,7 @@ def password():
             form = Change_Form()
             return render_template('user.html', page_title="user", user = user, form= form)
         else:
-            status = "wrong code"
+            status = "wrong code" # if they eneter code wrong
             return render_template('password.html', page_title="password", user = current_user, status = status)
     return render_template('password.html', page_title="password", user = current_user)
 
@@ -174,18 +176,15 @@ def map():
         clans  = models.Faction.query.all()
 
         locations  = models.Location.query.all()
-        location = []
+        location = [] # getting the locations and putting them in a list with names
         for i in range(len(locations)):
             location.append(locations[i].name)
 
 
         factions = models.Location_Faction.query.filter_by(period = period).all()
-        faction= []
+        faction= [] # getting the locations and putting them in a list with faction number
         for i in range(len(factions)):
             faction.append(factions[i].fid)
-
-        print(faction)
-        print(location)
 
         return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction,clan=clans)
     else:
@@ -194,10 +193,10 @@ def map():
         return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction,clan=clans)
 
 
-@app.route('/like', methods = ['POST'])
+@app.route('/maps', methods = ['POST'])
 def like():
-    period = json.loads(request.get_data())
-    period = period.get('degree')
+    period = json.loads(request.get_data()) # getting the data from map page
+    period = period.get('likes')
     locations  = models.Location.query.all()
     location = []
     for i in range(len(locations)):
@@ -209,33 +208,38 @@ def like():
     faction= []
     for i in range(len(factions)):
         faction.append(factions[i].fid)
+
     return(str(loacation))
 
 
 @app.route('/question', methods=['POST', 'GET'])
-def history():
+def question():
     current_user = session.get('name')
     form = Comment_Form()
-    if request.method=='GET':  # did the browser ask to see the page
+    if request.method=='GET':
         questions = models.Question.query.all()
-        for question in questions:
-            print(question.comments)
 
         return render_template('question.html', form=form, title="Question", user = current_user, questions = questions)
     else:
 
         questions = models.Question.query.all()
-        questions.reverse()
 
+        if request.method == 'POST' and "recent" in request.form:
 
+            questions = models.Question.query.order_by(models.Question.id.desc()).all() # seeing recent post using ids decesnding
+            return render_template('question.html', form=form, page_title="history", user = current_user, questions = questions)
+
+        if request.method == 'POST' and "last" in request.form:
+            questions = models.Question.query.all() # seeing late post using ids
+            return render_template('question.html', form=form, page_title="history", user = current_user, questions = questions)
 
         return render_template('question.html', form=form, page_title="history", user = current_user, questions = questions)
 
 
 @app.route('/question/create', methods=['POST', 'GET'])
 def create():
-    if session.get('name') == None:
-        return redirect(url_for("login_post"))
+    if session.get('name') == "Guest":
+        return redirect(url_for("login_post")) # if the user is ot logged in
 
     current_user = session.get('name')
     form = Comment_Form()
@@ -246,7 +250,8 @@ def create():
     if request.method == 'POST' and "title" in request.form:
 
         user = models.User.query.filter_by(name = session['name']).first()
-        userid = user.id
+        print(user)
+        userid = user.id #
 
         title = request.form['title']
         content = request.form['content']
@@ -257,17 +262,17 @@ def create():
 
         questions = models.Question.query.all()
 
-        return render_template('question.html', page_title="question", user = current_user, questions = questions,form=form)
+        return redirect(url_for("question"))
 
     return render_template('create.html', page_title="create", user = current_user, questions = questions,form=form)
 
 
-@app.route('/comment/<id>', methods=['POST', 'GET'])
+@app.route('/comment/<id>', methods=['POST', 'GET']) # getting what comment goes where
 def create_comment(id):
     form = Comment_Form()
     current_user = session.get('name')
-    b = session['name']
-    user = models.Comment(comment=form.comment.data, qid=id, user=b )
+    user = session['name']
+    user = models.Comment(comment=form.comment.data, qid=id, user=user)
     db.session.add(user)
     db.session.commit()
 
@@ -287,7 +292,7 @@ def user():
     form = Change_Form()
     user = models.User.query.filter_by(name = session['name']).first()
 
-    if request.method=='GET':  # did the browser ask to see the page
+    if request.method=='GET':
         return render_template('user.html', form=form, title="User", user = current_user, stats = user)
 
     else:
@@ -295,7 +300,7 @@ def user():
             session['name'] = None
             return redirect(url_for("home"))
 
-        elif form.validate_on_submit():
+        elif form.validate_on_submit(): # changing their password
             password = form.password.data
 
             user = models.User.query.filter_by(name = session['name']).first()
@@ -306,7 +311,7 @@ def user():
             user.salt = salt
             user.key = key
 
-            db.session.merge(user)
+            db.session.merge(user) # changing their password
             db.session.commit()
 
             chan = "ture"

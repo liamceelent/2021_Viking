@@ -4,7 +4,7 @@
 
 {% for viking in vikings %}
 
-  {% if viking.rating > 80 %}
+  {% if viking.rating > 80 %} <!-- changing the color depending on the rating -->
     <a href="/famous_click?viking_id={{viking.id}}">
       <div class = "wrapper_card_80">
         <div class = "img_famous">

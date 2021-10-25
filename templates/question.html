@@ -11,7 +11,14 @@
 </div>
 
 <div class = "question_options">
-
+  <p> sort by:</p>
+  <form method="POST">
+    <input type="checkbox" name = "last">
+    <label for="last">last</label>
+    <input type="checkbox" name = "recent">
+    <label for="recent">recent</label>
+    <input type="submit">
+  </form>
 </div>
 
 
@@ -27,14 +34,20 @@
           <div class = "reply_forms">
             <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}" id="reply_form">
               {{ form.csrf_token }}
-              <p> {{ form.comment(class_='forms_input') }} </p>
+              <p> {{ form.comment(class_='forms_input',autocomplete="off") }} </p>
               <input type="submit" value="comment" id = "reply_submit">
             </form>
           </div>
         </div>
+
       </div>
       <div class = "splitter_2">
-        <button id = "demo" onclick="change_name()">view comments</button>
+
+        {% if not question.comments %}
+          <button id = "view_comments">no comments yet</button>
+        {%else%}
+          <button id = "view_comments">view comments</button>
+        {%endif%}
 
         {% for comment in question.comments %}
 
@@ -91,7 +104,6 @@
 
   document.querySelectorAll(".splitter button")
     .forEach(element => element.addEventListener("click", toggle));
-
 
 </script>
 

@@ -198,9 +198,27 @@ background-color: var(--clr-primary)
   height: flex;
 }
 
+.question_options{
+  width: 100%;
+  text-align: center;
+}
+
+.question_options p{
+  color: var(--clr-neutral);
+  font-size: 2vw;
+}
+
+.question_options form{
+  color: var(--clr-neutral);
+  font-size: 1vw;
+  font-family: var(--font-family);
+  margin-top:1%;
+}
+
+
 .form_create{
   text-align: center;
-  margin: 0 0 10% 0;
+  margin: 0 0 5% 0;
 }
 
 .form_create a{
@@ -212,6 +230,10 @@ background-color: var(--clr-primary)
   font-size: 1.5vw;
   font-family: var(--font-family);
 
+}
+
+.form_create a:hover{
+  opacity: 0.8;
 }
 
 .writing_box{
@@ -269,6 +291,8 @@ background-color: var(--clr-primary)
   border: none;
   background: none;
   color: var(--clr-neutral-200);
+  font-family: var(--font-family);
+  font-size: .91vw;
 }
 .splitter_2 button:hover{
   color: var(--clr-neutral-100);
@@ -276,6 +300,8 @@ background-color: var(--clr-primary)
 
 #reply_btn{
   margin: 2.5% 0 5% 0;
+  font-family: var(--font-family);
+  font-size: 0.91vw;
 }
 
 #reply_submit{
@@ -344,6 +370,8 @@ background-color: var(--clr-primary)
   background-color: var(--clr-neutral);
   width:50%;
   margin: 2.5% 0 1.9% 0;
+  font-family: var(--font-family);
+  font-size: 1vw;
 }
 
 

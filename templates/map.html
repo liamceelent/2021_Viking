@@ -17,7 +17,7 @@
          ['Country',   'Faction',],
 
           {% for i in range(location|length) %} // this is getting all coutnris and the numebr beside it
-            ['{{ location[i] }}', {{ faction[i] }}],
+            ['{{ location[i] }}', {{ faction[i] }}], // google chart of the lists i sent through
 
           {% endfor %}
 
@@ -25,7 +25,7 @@
 
        var options = {
          region: '150', // euro
-         colorAxis: {colors: ['white', 'blue', 'black', '66FCF1', '45A29E', '#C5C6C7']},
+         colorAxis: {colors: ['white', 'blue', 'black', '66FCF1', '45A29E', '#C5C6C7']}, // chart colors
          backgroundColor: '#0B0C10',
          datalessRegionColor: 'aqua',
          defaultColor: 'aqua',
@@ -86,7 +86,7 @@
     var x = document.getElementById("period").value;
       console.log("yo");
 
-      fetch('/like', {
+      fetch('/maps', {
                    method: 'POST',
                    headers: {
                        'Content-Type': 'application/json',

@@ -74,7 +74,7 @@ class Question(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False)
     question = db.Column(db.String(225), unique=True)
     title = db.Column(db.String(225), unique=True)
-
+    like = db.Column(db.Integer)
     comments = db.relationship('Comment', back_populates='question')
     users = db.relationship('User')
 
