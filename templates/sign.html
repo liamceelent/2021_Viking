@@ -10,9 +10,9 @@
         <div class = "wrapper_forms">
           <form method="POST" enctype="multipart/form-data">
             {{ form.csrf_token }}
-            <p> {{ form.name }}</p>
-            <p> {{ form.password }} </p>
-            <p> {{ form.email }} </p>
+            <p> {{ form.name(placeholder="username") }}</p>
+            <p> {{ form.password(placeholder="password") }} </p>
+            <p> {{ form.email(placeholder="email") }} </p>
             <input type="submit" value="Login">
           </form>
         </div>

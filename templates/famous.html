@@ -2,6 +2,19 @@
 
 {% block content %}
 
+<div class = "question_options">
+  <p> sort by:</p>
+  <form method="POST">
+    <input type="checkbox" name = "rating_low">
+    <label for="rating_low">rating low</label>
+    <input type="checkbox" name = "rating_high">
+    <label for="rating_high">rating high</label>
+
+
+    <input type="submit">
+  </form>
+</div>
+
 {% for viking in vikings %}
 
   {% if viking.rating > 80 %} <!-- changing the color depending on the rating -->

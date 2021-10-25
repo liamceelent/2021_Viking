@@ -59,7 +59,7 @@ def login_post():
                 , salt, 100000)  # hashing password to check
                 if key == new_key:
                     session['name'] = name
-                    return redirect(url_for("login_post"))
+                    return redirect(url_for("home"))
                 else:
                     status = "Wrong user name or password."
                     return render_template('login.html', status=status, form=form)
@@ -373,11 +373,33 @@ def user():
 
 @app.route('/famous', methods=['POST', 'GET'])
 def famous():
-    famous_vikings = models.Famous_Viking.query.all()
-    current_user = session.get('name')
-    return render_template('famous.html', page_title="famous", vikings = famous_vikings\
-    , user = current_user)
+    if request.method=='GET':
+        famous_vikings = models.Famous_Viking.query.all()
+        current_user = session.get('name')
+        return render_template('famous.html', page_title="famous", vikings = famous_vikings\
+        , user = current_user)
 
+    else:
+        current_user = session.get('name')
+        vikings = models.Famous_Viking.query.all()
+
+
+        if request.method == 'POST' and "rating_low" in request.form:
+            print("hi")
+            vikings = models.Famous_Viking.query.order_by(models.Famous_Viking.rating.asc())\
+            .all()  # seeing recent post using ids decesnding
+            return render_template('famous.html', page_title="famous"\
+            , user = current_user, vikings = vikings)
+
+        if request.method == 'POST' and "rating_high" in request.form:
+
+            vikings = models.Famous_Viking.query.order_by(models.Famous_Viking.rating.desc())\
+            .all()  # seeing recent post using ids decesnding
+            return render_template('famous.html', page_title="famous"\
+            , user = current_user, vikings = vikings)
+
+        return render_template('famous.html', page_title="famous"\
+        , user = current_user, vikings = vikings)
 
 @app.route('/famous_click', methods=['POST', 'GET'])
 def famous_click():

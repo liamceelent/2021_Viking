@@ -478,7 +478,7 @@ input{
   left:50%;
   text-align: center;
   float: left;
-  margin:2%;
+  margin:1.9%;
 
 }
 
@@ -532,7 +532,7 @@ input{
 }
 
 .click_img img{
-  width:80%;
+  max-width:80%;
   height: 50%;
   margin-bottom: 5%;
 }
