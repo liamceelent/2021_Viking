@@ -181,17 +181,14 @@ def map():
         current_user = session.get('name')
         period = 1
         clans  = models.Faction.query.all()
-
-        locations  = models.Location.query.all()
-        location = []  # getting the locations and putting them in a list with names
-        for i in range(len(locations)):
-            location.append(locations[i].name)
-
-
+        
         factions = models.Location_Faction.query.filter_by(period = period).all()
-        faction= []  # getting the locations and putting them in a list with faction number
+        faction= []
+        location = []  # getting the locations and putting them in a list with faction number
         for i in range(len(factions)):
             faction.append(factions[i].fid)
+            a = models.Location.query.filter_by(id = factions[i].lid).first()
+            location.append(a.name)
 
         return render_template('map.html', page_title="map", user = current_user,\
          location = location, faction = faction,clan=clans)
@@ -217,6 +214,7 @@ def like():
     faction= []
     for i in range(len(factions)):
         faction.append(factions[i].fid)
+        print(factions[i])
 
     return(str(loacation))
 
@@ -299,8 +297,8 @@ def create():
         user = models.User.query.filter_by(name = session['name']).first()
         print(user)
         userid = user.id #
-
-        title = request.form['title']
+        print(user.id)
+        title = request.form['ti   tle']
         content = request.form['content']
 
         user = models.Question(question=content, title=title, user = user.id)

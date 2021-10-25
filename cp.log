@@ -6,3 +6,4 @@ DEBUG: file: None
 DEBUG: pause: True
 DEBUG: repl: python
 DEBUG: args: ['C:\\Users\\17558\\github\\2021_Viking\\main.py']
+INFO: return code: 3221225786 (0xc000013a)
