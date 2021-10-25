@@ -38,12 +38,12 @@ input{
   text-align: center;
   font-size: 3vw;
   font-family: var(--font-family);
-
 }
 
 .nav a{
   color: var(--clr-neutral);
   margin-left:5%;
+
 }
 
 .nav a:hover{
@@ -183,7 +183,10 @@ input{
 background-color: var(--clr-primary)
 }
 
-
+.key{
+  width:10%;
+  height:10%;
+}
 
 /* question */
 
@@ -268,7 +271,7 @@ background-color: var(--clr-primary)
   color: var(--clr-neutral-200);
 }
 .splitter_2 button:hover{
-  color: blue;
+  color: var(--clr-neutral-100);
 }
 
 #reply_btn{
@@ -300,7 +303,7 @@ background-color: var(--clr-primary)
 
 .create_title{
   text-align: center;
-  font-size: 5vw;
+  font-size: 3vw;
   font-family: var(--font-family);
   margin-top: 5%;
   color: var(--clr-neutral-200);
@@ -471,38 +474,86 @@ background-color: var(--clr-primary)
 }
 
 /* userrrrrrrrrrrrr */
+.background_user{
+  width:100%;
+  height: 100%;
+  background-image: url("/static/image/history.png");
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding-top:10%;
+}
 
 .user_wrapper{
   width:30%;
   height:flex;
   border: 0.5vw solid var(--clr-neutral-100);
   margin: auto;
-  margin-top:10%;
   margin-bottom: 10%;
   text-align: center;
   border-radius: 1vw;
   padding: 2.5%;
+  background-color: rgba(11, 12, 16,.85);
 }
 
 .user_wrapper h1{
   color: var(--clr-neutral);
+  font-family: var(--font-family)
 }
 
 .logout input{
   width:50%;
-  height:6%;
+  height:3%;
   border-radius: 0.2vw;
-  font-size: 200%;
+  font-size: 100%;
+  margin: 5% 0 0 0;
+  background-color: var(--clr-neutral);
 }
 
 .logout input:hover{
   opacity: 0.6;
 }
 .pass_change input{
-
   border-radius: 0.2vw;
+  margin:  5% 0 0 0;
+  background-color: var(--clr-neutral);
+  width: 50%;
+  height:3.5%;
 }
 
+
+.pass_change input:hover{
+  border-radius: 0.2vw;
+  margin:  5% 0 0 0;
+}
+
+.pass_change h1{
+  font-size: 2vw;
+}
+
+#password:focus{
+  border:0.2vw solid var(--clr-neutral-100);
+  outline: none;
+}
+
+#logout_submit {
+  margin: 2.55% 0 0 0;
+  background-color: var(--clr-neutral);
+  font-size: 100%;
+  width:50%;
+}
+
+
+#logout_submit:hover{
+  opacity: 0.7;
+
+}
+
+
+.logout{
+
+}
 
 
 /* 4000000000000000000000000004 */

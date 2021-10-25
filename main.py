@@ -27,7 +27,7 @@ def home():
     if session.get('name') != None:
         pass
     else:
-        session['name'] = None
+        session['name'] = "Guest"
     current_user = session.get('name')
     return render_template('home.html', page_title="Home", user = current_user)
 
@@ -265,9 +265,9 @@ def create():
 @app.route('/comment/<id>', methods=['POST', 'GET'])
 def create_comment(id):
     form = Comment_Form()
-
-
-    user = models.Comment(comment=form.comment.data, qid=id)
+    current_user = session.get('name')
+    b = session['name']
+    user = models.Comment(comment=form.comment.data, qid=id, user=b )
     db.session.add(user)
     db.session.commit()
 

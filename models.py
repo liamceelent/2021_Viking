@@ -61,7 +61,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     comment = db.Column(db.String(225), unique=True)
     qid = db.Column(db.Integer, db.ForeignKey('Question.id'), nullable = False)
-
+    user = db.Column(db.String(225))
     question = db.relationship('Question', back_populates = 'comments')
 
     def __repr__(self):
