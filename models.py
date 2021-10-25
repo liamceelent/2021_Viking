@@ -22,7 +22,7 @@ class Faction(db.Model):
     __tablename__ = "Faction"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
-
+    color = db.Column(db.String(225))
     location = db.relationship('Location_Faction', back_populates='factions')
 
 
@@ -74,7 +74,6 @@ class Question(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('User.id'), nullable = False)
     question = db.Column(db.String(225), unique=True)
     title = db.Column(db.String(225), unique=True)
-    like = db.Column(db.Integer)
     comments = db.relationship('Comment', back_populates='question')
     users = db.relationship('User')
 

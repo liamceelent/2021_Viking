@@ -48,31 +48,29 @@
 
 
 
-  <body id ="map">
+  <body id ="overall">
 
     {% include 'nav.html' %}
-
-    <div id="geochart-colors"></div>
-
-      <div class = "temp">
+    <div class = "map_wrapper">
+      <div class = "map_text">
         <form method="POST">
           <input type="range" min="1" max="5" value="3" id="period">
            <button>view comments</button>
          </form>
 
-       <div class="clans">
+       <div class="clan_wrapper">
         {% for clans in clan %}
 
           <div class = "clans">
-            <h1>{{clans.name}} {{clans.id}}</h1>
-            <div class ="key" style="background-color:blue;" ></div>
+            <h1 style="color:{{ clans.color }};">{{clans.name}}</h1>
 
           </div>
 
         {% endfor %}
         </div>
       </div>
-
+    </div>
+    <div id="geochart-colors"></div>
 
     </body>
 

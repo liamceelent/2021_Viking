@@ -17,6 +17,8 @@
     <label for="last">last</label>
     <input type="checkbox" name = "recent">
     <label for="recent">recent</label>
+    <input type="input"name="search">
+
     <input type="submit">
   </form>
 </div>
@@ -27,8 +29,8 @@
     {% for question in questions %}
     <div class = "question_box">
       <div class = "splitter">
-        <p>{{question.users.name}}</p>
-        <p>{{ question.title }}   {{ question.question }} by {{question.users.name}}</p>
+        <p>{{ question.title }} </p>
+        <p>{{ question.question }} by {{question.users.name}}</p>
         <button id= "reply_btn">reply</button>
         <div id = "reply" class="reply">
           <div class = "reply_forms">
@@ -53,7 +55,7 @@
 
         <div id = "comments" class="comments">
           <div class ="comment_section">
-             <p>{{ comment.comment }}    by {{ comment.user }}</p>
+             <p>{{ comment.comment }} by {{ comment.user }}</p>
           </div>
         </div>
         {% endfor %}
