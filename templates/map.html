@@ -25,7 +25,7 @@
 
        var options = {
          region: '150', // euro
-         colorAxis: {colors: ['purple', 'blue', 'black', 'green', 'yellow', 'orange', 'red', '#C5C6C7']},
+         colorAxis: {colors: ['white', 'blue', 'black', '66FCF1', '45A29E', '#C5C6C7']},
          backgroundColor: '#0B0C10',
          datalessRegionColor: 'aqua',
          defaultColor: 'aqua',
@@ -54,31 +54,53 @@
 
     <div id="geochart-colors"></div>
 
-    <div class = "temp">
-    <form method="POST">
-       <select name="period" id="period">
-         <option value="1">1</option>
-         <option value="2">2</option>
-         <option value="3">3</option>
-         <option value="4">4</option>
-         <option value="5">5</option>
+      <div class = "temp">
+        <form method="POST">
+          <input type="range" min="1" max="5" value="3" id="period">
+           <button>view comments</button>
+         </form>
 
-       </select>
-       <input type="submit" id="submit"></input>
-     </form>
+       <div class="clans">
+        {% for clans in clan %}
 
-   </head>
-   <div class="clans">
-    {% for clans in clan %}
+          <div class = "clans">
+            <h1>{{clans.name}} {{clans.id}}</h1>
+            <
 
-      <div class = "clans">
-        <h1>{{clans.name}} {{clans.id}}</h1>
+          </div>
+
+        {% endfor %}
+        </div>
       </div>
 
-    {% endfor %}
-  </div>
-</div> <!-- Closing Temp -->
-  </body>
+
+    </body>
+
+  </html>
+  <script>
+
+  document.querySelectorAll(".temp button")
+    .forEach(element => element.addEventListener("click", change));
+
+  function change() {
+    var x = document.getElementById("period").value;
+      console.log("yo");
+
+      fetch('/like', {
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json',
+                   },
+                   body: JSON.stringify({
+                       degree: x,
+                   })
+               })
+
+    }
+
+
+
+  </script>
 
 </html>
 

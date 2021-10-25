@@ -10,26 +10,31 @@
   <a href="/question/create"> create a question </a>
 </div>
 
+<div class = "question_options">
+
+</div>
+
+
 <div class = "wrapper_question">
   <div class = "writing_box"> <!-- displays question then all comments in question -->
     {% for question in questions %}
     <div class = "question_box">
       <div class = "splitter">
         <p>{{question.users.name}}</p>
-        <p>{{ question.title }}{{ question.question }} by {{question.users.name}}</p>
-        <button>reply</button>
+        <p>{{ question.title }}   {{ question.question }} by {{question.users.name}}</p>
+        <button id= "reply_btn">reply</button>
         <div id = "reply" class="reply">
           <div class = "reply_forms">
-            <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}">
+            <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}" id="reply_form">
               {{ form.csrf_token }}
-              <p> {{ form.comment }} </p>
-              <input type="submit" value="comment">
+              <p> {{ form.comment(class_='forms_input') }} </p>
+              <input type="submit" value="comment" id = "reply_submit">
             </form>
           </div>
         </div>
       </div>
       <div class = "splitter_2">
-        <button>comments</button>
+        <button id = "demo" onclick="change_name()">view comments</button>
 
         {% for comment in question.comments %}
 
@@ -40,7 +45,7 @@
       </div>
 
 
-
+    <div> .</div>
 
     </div>
     {% endfor %}
@@ -52,7 +57,7 @@
 <script>
   function toggle1(event) {
     console.log("comment")
-    event.target.parentElement.querySelectorAll('.comments').forEach((element) => {
+    event.target.parentElement.querySelectorAll('.comment_section').forEach((element) => {
       if (element.style.display === "block") {
         element.style.display = "none";
       }
@@ -84,6 +89,8 @@
 
   document.querySelectorAll(".splitter button")
     .forEach(element => element.addEventListener("click", toggle));
+
+
 </script>
 
 

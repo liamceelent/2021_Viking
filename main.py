@@ -1,7 +1,9 @@
 from flask import Flask, url_for, render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import asc, desc
 from config import Config
 from random import randint
+import json
 
 import smtplib
 import hashlib
@@ -182,33 +184,38 @@ def map():
         for i in range(len(factions)):
             faction.append(factions[i].fid)
 
+        print(faction)
+        print(location)
+
         return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction,clan=clans)
     else:
-        period = request.form.get("period")
-        current_user = session.get('name')
-
-        locations  = models.Location.query.all()
-        location = []
-        for i in range(len(locations)):
-            location.append(locations[i].name)
-
-        clans  = models.Faction.query.all()
-
-        factions = models.Location_Faction.query.filter_by(period = period).all()
-        faction= []
-        for i in range(len(factions)):
-            faction.append(factions[i].fid)
-
+        a = like()
+        print(a)
         return render_template('map.html', page_title="map", user = current_user, location = location, faction = faction,clan=clans)
+
+
+@app.route('/like', methods = ['POST'])
+def like():
+    period = json.loads(request.get_data())
+    period = period.get('degree')
+    locations  = models.Location.query.all()
+    location = []
+    for i in range(len(locations)):
+        location.append(locations[i].name)
+
+    clans  = models.Faction.query.all()
+
+    factions = models.Location_Faction.query.filter_by(period = period).all()
+    faction= []
+    for i in range(len(factions)):
+        faction.append(factions[i].fid)
+    return(str(loacation))
 
 
 @app.route('/question', methods=['POST', 'GET'])
 def history():
-
-
     current_user = session.get('name')
     form = Comment_Form()
-
     if request.method=='GET':  # did the browser ask to see the page
         questions = models.Question.query.all()
         for question in questions:
@@ -218,13 +225,11 @@ def history():
     else:
 
         questions = models.Question.query.all()
-        for question in questions:
-            print(question.comment)
-        comment = form.comment.data
+        questions.reverse()
 
 
 
-        return render_template('question.html', page_title="history", user = current_user, questions = questions)
+        return render_template('question.html', form=form, page_title="history", user = current_user, questions = questions)
 
 
 @app.route('/question/create', methods=['POST', 'GET'])
@@ -233,7 +238,7 @@ def create():
         return redirect(url_for("login_post"))
 
     current_user = session.get('name')
-
+    form = Comment_Form()
     user = session.get('name')
 
     questions = models.Question.query.all()
@@ -251,9 +256,10 @@ def create():
         db.session.commit()
 
         questions = models.Question.query.all()
-        return render_template('question.html', page_title="question", user = current_user, questions = questions)
 
-    return render_template('create.html', page_title="create", user = current_user, questions = questions)
+        return render_template('question.html', page_title="question", user = current_user, questions = questions,form=form)
+
+    return render_template('create.html', page_title="create", user = current_user, questions = questions,form=form)
 
 
 @app.route('/comment/<id>', methods=['POST', 'GET'])
