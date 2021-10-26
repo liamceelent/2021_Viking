@@ -180,32 +180,47 @@ def map():
     if request.method=='GET':
         current_user = session.get('name')
         period = 1
-        clans  = models.Faction.query.all()
 
         locations  = models.Location.query.all()
-        location = []  # getting the locations and putting them in a list with names
+        location = []
         for i in range(len(locations)):
             location.append(locations[i].name)
 
+        clans  = models.Faction.query.all()
 
         factions = models.Location_Faction.query.filter_by(period = period).all()
-        faction= []  # getting the locations and putting them in a list with faction number
+
+        faction= []
+
         for i in range(len(factions)):
             faction.append(factions[i].fid)
 
-        return render_template('map.html', page_title="map", user = current_user,\
-         location = location, faction = faction,clan=clans)
+        places = {
+            "faction": faction,
+            "location": location,
+        }
+
+
+        print(places["location"] , places["faction"])
+
+
+
+
+        return render_template('map.html', page_title="map", user = current_user, places = places,clan=clans)
+
     else:
-        a = like()
-        print(a)
         return render_template('map.html', page_title="map", user = current_user,\
          location = location, faction = faction,clan=clans)
 
 
 @app.route('/maps', methods = ['POST'])
-def like():
+def map_java():
+
     period = json.loads(request.get_data())  # getting the data from map page
-    period = period.get('likes')
+    print(period)
+    period = period.get('period')
+    print(period)
+
     locations  = models.Location.query.all()
     location = []
     for i in range(len(locations)):
@@ -214,11 +229,28 @@ def like():
     clans  = models.Faction.query.all()
 
     factions = models.Location_Faction.query.filter_by(period = period).all()
+
     faction= []
+
     for i in range(len(factions)):
         faction.append(factions[i].fid)
 
-    return(str(loacation))
+    places = {
+        "faction": faction,
+        "location": location,
+    }
+    print("yooo")
+    print(places["location"] , places["faction"])
+
+    return(json.dumps(places))
+
+
+@app.route('/<id>', methods=['POST', 'GET'])  # getting what comment goes where
+def click_map(id):
+    id = int(id) + 1
+    location = models.Location.query.filter_by(id = id)
+    print(location)
+    return render_template('faction.html', page_title="create" , location = location)
 
 
 @app.route('/question', methods=['POST', 'GET'])
@@ -299,8 +331,8 @@ def create():
         user = models.User.query.filter_by(name = session['name']).first()
         print(user)
         userid = user.id #
-
-        title = request.form['title']
+        print(user.id)
+        title = request.form['ti   tle']
         content = request.form['content']
 
         user = models.Question(question=content, title=title, user = user.id)

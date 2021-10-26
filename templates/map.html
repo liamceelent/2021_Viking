@@ -16,16 +16,15 @@
        var data = google.visualization.arrayToDataTable([
          ['Country',   'Faction',],
 
-          {% for i in range(location|length) %} // this is getting all coutnris and the numebr beside it
-            ['{{ location[i] }}', {{ faction[i] }}], // google chart of the lists i sent through
-
+          {% for i in range(places["location"]|length) %} // this is getting all coutnris and the numebr beside it
+            ['{{ places["location"][i] }}', {{ places["faction"][i]  }}], // google chart of the lists i sent through
           {% endfor %}
 
          ]);
 
        var options = {
          region: '150', // euro
-         colorAxis: {colors: ['white', 'blue', 'black', '66FCF1', '45A29E', '#C5C6C7']}, // chart colors
+         colorAxis: {colors: ['white', 'blue', '3009A0', '66FCF1', '45A29E', 'C5C6C7']}, // chart colors
          backgroundColor: '#0B0C10',
          datalessRegionColor: 'aqua',
          defaultColor: 'aqua',
@@ -36,9 +35,11 @@
 
        google.visualization.events.addListener(chart, 'select', function () {
          var selection = chart.getSelection();
-         if (selection.length > 0) {
-           window.location.replace("http://127.0.0.1:5000/");
-         }
+        item = selection[0]
+        a = item.row
+        console.log(a);
+        window.location.replace(a);
+
        });
 
 
@@ -51,23 +52,25 @@
   <body id ="overall">
 
     {% include 'nav.html' %}
+
     <div class = "map_wrapper">
       <div class = "map_text">
+        <h1> sleect a period </h1>
         <form method="POST">
-          <input type="range" min="1" max="5" value="3" id="period">
-           <button>view comments</button>
-         </form>
+        <input type="range" min="1" max="5" value="3" id="period">
+        </form>
+        <button>view comments</button>
+      </div>
 
-       <div class="clan_wrapper">
-        {% for clans in clan %}
+      <div class="clan_wrapper">
+      {% for clans in clan %}
 
-          <div class = "clans">
-            <h1 style="color:{{ clans.color }};">{{clans.name}}</h1>
+        <div class = "clans">
+        <h1 style="color:{{ clans.color }};">{{clans.name}}</h1>
 
-          </div>
-
-        {% endfor %}
         </div>
+
+      {% endfor %}
       </div>
     </div>
     <div id="geochart-colors"></div>
@@ -77,7 +80,7 @@
   </html>
   <script>
 
-  document.querySelectorAll(".temp button")
+  document.querySelectorAll(".map_text button")
     .forEach(element => element.addEventListener("click", change));
 
   function change() {
@@ -90,10 +93,28 @@
                        'Content-Type': 'application/json',
                    },
                    body: JSON.stringify({
-                       degree: x,
+                       period: x,
                    })
                })
 
+               .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        event.target.parentElement.querySelector("p").innerHTML = data + "<span>&#10084;</span>";
+                        switch (event.target.checked) {
+                            case (true):
+                                color = "#0000004d";
+                                break;
+                            case (false):
+                                color = "#2d539e"
+                                break;
+                            default:
+                                color = "#2d539e";
+
+                        }
+                        event.target.parentElement.querySelector("span").style.color = color;
+
+                    });
     }
 
 

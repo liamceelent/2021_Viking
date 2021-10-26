@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% for locations in location %}
+  <div class = "wrapper_click">
+      <div class = "click_title">
+        <p>  {{locations.name }} </p>
+      </div>
+
+      <div class = "click_img">
+         <img src="/static/image/{{locations.flag}}">
+      </div>
+
+
+      <div class = "writing">
+        <p> {{locations.desc}} </p>
+      </div>
+
+
+
+  </div>
+
+{% endfor %}
+
+{% endblock %}

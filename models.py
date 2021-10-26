@@ -14,7 +14,8 @@ class Location(db.Model):
     __tablename__ = "Location"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(225), unique=True)
-
+    desc = db.Column(db.String(225))
+    flag = db.Column(db.String(225))
     faction = db.relationship('Location_Faction', back_populates='locations')
 
 
