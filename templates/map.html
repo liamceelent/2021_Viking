@@ -13,17 +13,18 @@
 
     <div class = "map_wrapper">
       <div class = "map_text">
-        <h1> slecet a period </h1>
+        <h1> Select a period: </h1>
         <form method="POST">
-        <input type="range" min="1" max="10" value="1" id="period">
+        <input type="range" min="1" max="10" value="5" id="period">
         </form>
       </div>
+      <p> Faction number plus color: </p>
 
       <div class="clan_wrapper">
       {% for clans in clan %}
-
         <div class = "clans">
-        <h1 style="color:{{ clans.color }};">{{clans.name}}</h1> <!-- custom colors -->
+
+        <h1 style="color:{{ clans.color }};"> {{clans.id}}. {{clans.name}}</h1> <!-- custom colors -->
 
         </div>
 
@@ -60,13 +61,6 @@
 
       // this is when a user clicks on a map item it will send to a new page
 
-      google.visualization.events.addListener(chart, 'select', function () {
-        var selection = chart.getSelection();
-       item = selection[0]
-       a = item.row
-
-       window.location.replace(a);
-      });
 
 
       chart.draw(data, options);
