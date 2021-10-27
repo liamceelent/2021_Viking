@@ -9,7 +9,7 @@
       <h1>  Change Password </h1>
       <form method="POST" enctype="multipart/form-data">
         {{ form.csrf_token }}
-        <p> {{ form.password(autocomplete="off") }} </p>
+        <p> {{ form.password(autocomplete="off", id = "yo") }} </p>
         <input type="submit" value="Confirm" id = "logout_submit">
       </form>
     </div>
@@ -23,9 +23,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 {% endblock %}

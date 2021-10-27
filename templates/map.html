@@ -13,18 +13,17 @@
 
     <div class = "map_wrapper">
       <div class = "map_text">
-        <h1> sleect a period </h1>
+        <h1> slecet a period </h1>
         <form method="POST">
-        <input type="range" min="1" max="5" value="3" id="period">
+        <input type="range" min="1" max="10" value="5" id="period">
         </form>
-        <button>view comments</button>
       </div>
 
       <div class="clan_wrapper">
       {% for clans in clan %}
 
         <div class = "clans">
-        <h1 style="color:{{ clans.color }};">{{clans.name}}</h1>
+        <h1 style="color:{{ clans.color }};">{{clans.name}}</h1> <!-- custom colors -->
 
         </div>
 
@@ -43,26 +42,9 @@
       'packages':['geochart'], // google plug ins
       'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
     });
-    google.charts.setOnLoadCallback(drawRegionsMap);
+    google.charts.setOnLoadCallback(change);
 
-    function drawRegionsMap(d) {
-      if(d){
-        var data = d
-        console.log(data)
-      }
-
-      else {
-        console.log('{{places["location"]}}')
-        var data = google.visualization.arrayToDataTable([
-          ['Country',   'Faction',],
-
-           {% for i in range(places["location"]|length) %} // this is getting all coutnris and the numebr beside it
-             ['{{ places["location"][i] }}', {{ places["faction"][i]  }}], // google chart of the lists i sent through
-           {% endfor %}
-
-          ]);
-          console.log(data)
-      }
+    function drawRegionsMap(data) {
 
 
       var options = {
@@ -76,12 +58,14 @@
 
       var chart = new google.visualization.GeoChart(document.getElementById('geochart-colors'));
 
+      // this is when a user clicks on a map item it will send to a new page
+
       google.visualization.events.addListener(chart, 'select', function () {
         var selection = chart.getSelection();
        item = selection[0]
        a = item.row
-       console.log(a);
 
+       window.location.replace(a);
       });
 
 
@@ -89,36 +73,31 @@
     };
 
     // NOT GOOGLE
-    document.querySelectorAll(".map_text button")
-      .forEach(element => element.addEventListener("click", change));
+    // getting the slider value
+    document.querySelector("#period").addEventListener("change", change)
 
     function change() {
       var x = document.getElementById("period").value;
-        console.log("yo");
+      // sending it through to the route page to get information
+      fetch('/maps', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({
+               period: x, // what variable sending
+           })
+       }).then(response => response.json()) // after route done with it
+          .then(data => {
+              const mapData = data["faction"].map((faction, i) => [data["location"][i], faction]) // creating a constant that zip togther the location and faction
+              var map = google.visualization.arrayToDataTable([
+                ['Country',   'Faction'],
+                ...mapData // making the inner arrays merge into the outer array
+              ]);
 
-        fetch('/maps', {
-                     method: 'POST',
-                     headers: {
-                         'Content-Type': 'application/json',
-                     },
-                     body: JSON.stringify({
-                         period: x,
-                     })
-                 })
+              drawRegionsMap(map) // using the google functione
 
-                 .then(response => response.json())
-                      .then(data => {
-                          console.log('Success:', data["faction"], data["location"]);
-
-                          lst = [["russia", 1], ['a', 2]]
-                          var map = google.visualization.arrayToDataTable([
-                            ['Country',   'Faction',],
-                            lst
-                            ]);
-
-                          drawRegionsMap(map)
-
-                      });
+          });
 
 
       }

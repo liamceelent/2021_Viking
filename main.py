@@ -16,8 +16,6 @@ db = SQLAlchemy(app)
 
 WTF_CSRF_ENABLED = True
 WTF_CSRF_SECRET_KEY = 'sup3r_secr3t_passw3rd'
-
-
 EMAIL_ADDRESS = "limct1232@gmail.com"  # for sending email account
 EMAIL_PASSWORD = "vcquwfgmlnoobuvi"
 
@@ -38,20 +36,16 @@ def home():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login_post():
-
     form = Login_Form()
     current_user = session.get('name')
     if request.method=='GET':  # did the browser ask to see the page
         return render_template('login.html', form=form, title="Login",\
          user = current_user)
-
     else:
         if form.validate_on_submit():
             name = form.name.data
             password = form.password.data
-
             name_check = models.User.query.filter_by(name=name).first()  # seeing if name is in databse
-
             if name_check is not None:
                 salt = name_check.salt
                 key = name_check.key
@@ -70,28 +64,22 @@ def login_post():
 
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up_post():
-
     form = Sign_Form()
     current_user = session.get('name')
-
     if request.method=='GET':  # did the browser ask to see the page
         return render_template('sign.html', form=form, title="Login", \
         user = current_user)
     else:
-
         name = form.name.data
         password = form.password.data
         email = form.email.data
-
         name_check = models.User.query.filter_by(name=name).first()  # seeing if name or email is in databse
         email_check = models.User.query.filter_by(email=email).first()
-
         if name_check is None:
             if email_check is None:
                 salt = os.urandom(32)
                 key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), \
                 salt, 100000)  # hashing salting
-
                 user = models.User(name=name, salt=salt, key=key, email=email)
                 db.session.add(user)
                 db.session.commit()
@@ -109,10 +97,8 @@ def sign_up_post():
 
 @app.route('/forgot', methods=['POST', 'GET'])
 def forgot():
-
     form = Forgot_Form()
     current_user = session.get('name')
-
     if request.method=='GET':  # did the browser ask to see the page
         return render_template('forgot.html', form=form, title="Forgot", \
         user = current_user)
@@ -120,15 +106,12 @@ def forgot():
         if form.validate_on_submit():
             form = Forgot_Form()
             email = form.email.data
-
             global email_check  # check if email is in database
             email_check = models.User.query.filter_by(email=email).first()
-
             if email_check == None:
                 return redirect(url_for("login_post"))
             else:
                 if email_check is not None:
-
                     global password_change  # storing the change password
                     password_change = randint(10000, 99999)
 
@@ -146,7 +129,6 @@ def forgot():
                         smtp.sendmail("limct1232@gmail.com", email, msg)
 
                     return redirect(url_for("password"))
-
                 else:
                     form = Forgot_Form()
                     return render_template('forgot.html', page_title="forgot", \
@@ -155,12 +137,10 @@ def forgot():
 
 @app.route('/password', methods=['POST', 'GET'])
 def password():
-
     current_user = session.get('name')
     form = Change_Form()
     if request.method == 'POST' and "code" in request.form:
         code = request.form['code']  # code that they enetered
-
         if password_change == int(code):
             current_user = models.User.query.filter_by(email=email_check.email).first()
             user = current_user.name
@@ -176,41 +156,23 @@ def password():
 
 @app.route('/map', methods=['POST', 'GET'])
 def map():
-
     if request.method=='GET':
         current_user = session.get('name')
         period = 1
-
         locations  = models.Location.query.all()
         location = []
         for i in range(len(locations)):
             location.append(locations[i].name)
-
         clans  = models.Faction.query.all()
-
         factions = models.Location_Faction.query.filter_by(period = period).all()
-
         faction= []
-
         for i in range(len(factions)):
             faction.append(factions[i].fid)
-
         places = {
             "faction": faction,
             "location": location,
         }
-
-
-        print(places["location"] , places["faction"])
-
-
-
-
         return render_template('map.html', page_title="map", user = current_user, places = places,clan=clans)
-
-    else:
-        return render_template('map.html', page_title="map", user = current_user,\
-         location = location, faction = faction,clan=clans)
 
 
 @app.route('/maps', methods = ['POST'])
@@ -245,7 +207,7 @@ def map_java():
     return(json.dumps(places))
 
 
-@app.route('/<id>', methods=['POST', 'GET'])  # getting what comment goes where
+@app.route('/<int:id>', methods=['POST', 'GET'])  # getting what comment goes where
 def click_map(id):
     id = int(id) + 1
     location = models.Location.query.filter_by(id = id)
@@ -332,7 +294,7 @@ def create():
         print(user)
         userid = user.id #
         print(user.id)
-        title = request.form['ti   tle']
+        title = request.form['title']
         content = request.form['content']
 
         user = models.Question(question=content, title=title, user = user.id)
@@ -358,7 +320,7 @@ def create_comment(id):
 
     questions = models.Question.query.all()
     return render_template('question.html', page_title="create",  questions = questions\
-    , form=form)
+    , form=form, user = current_user)
 
 
 @app.route('/user', methods=['POST', 'GET'] )
@@ -395,9 +357,9 @@ def user():
             db.session.merge(user)  # changing their password
             db.session.commit()
 
-            chan = "ture"
+            status = "Password has been changed"
             return render_template('user.html', page_title="user", user = current_user\
-            , form = form, status = chan)
+            , form = form, status = status)
 
     return render_template('user.html', page_title="user", user = current_user, \
     image = image, stats = user, allimage = allimage)

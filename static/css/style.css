@@ -24,9 +24,9 @@ input{
 }
 
 
-
 #overall{
   background-color: var(--clr-primary);
+  overflow-x: hidden;
 }
 
 /*nabavcvcvavvavavavavavva*/
@@ -43,13 +43,14 @@ input{
 .nav a{
   color: var(--clr-neutral);
   margin-left:5%;
-
 }
 
 .nav a:hover{
   color: var(--clr-neutral-200);
 }
+
 /*hommememememememme*/
+
 .wrapper_home{
   width:100%;
   height: flex;
@@ -75,6 +76,7 @@ input{
   margin: auto;
   padding: 10% 0 0 0;
 }
+
 /*loginnnnnnnnnnn*/
 
 .wrapper_login{
@@ -137,7 +139,6 @@ input{
   opacity: 0.85;
 }
 
-
 .sign_up{
   float: left;
   margin: auto;
@@ -180,6 +181,7 @@ input{
   margin:auto;
   margin-top: 4%;
 }
+
 
 .map_wrapper{
   width:90%;
@@ -240,7 +242,6 @@ input{
   font-size: 1vw;
 }
 
-
 .clan_wrapper{
   width:100%;
   background-color: var(--clr-primary);
@@ -249,8 +250,6 @@ input{
 }
 
 /* question */
-
-
 
 .wrapper_question{
   margin: 0% 0 0 10%;
@@ -275,7 +274,6 @@ input{
   margin-top:1%;
 }
 
-
 .form_create{
   text-align: center;
   margin: 0 0 5% 0;
@@ -289,7 +287,6 @@ input{
   text-decoration: none;
   font-size: 1.5vw;
   font-family: var(--font-family);
-
 }
 
 .form_create a:hover{
@@ -299,7 +296,6 @@ input{
 .writing_box{
   width:100%;
   height:flex;
-
 }
 
 .writing_box p{
@@ -354,6 +350,7 @@ input{
   font-family: var(--font-family);
   font-size: .91vw;
 }
+
 .splitter_2 button:hover{
   color: var(--clr-neutral-100);
 }
@@ -371,7 +368,6 @@ input{
   border-bottom: .1vw solid grey;
   font-size: 1vw;
   margin: 0 0 1vw 0;
-
 }
 
 .forms_input{
@@ -385,6 +381,7 @@ input{
   color:white;
   outline:none
 }
+
 /* question create wddmwdimawodimawodiaod */
 
 .create_title{
@@ -413,6 +410,7 @@ input{
   color: grey;
   margin-top: 2.5%;
 }
+
 .post_title_create input{
   width:50%;
   margin-top: 2.5%;
@@ -433,7 +431,6 @@ input{
   font-family: var(--font-family);
   font-size: 1vw;
 }
-
 
 .post_title_create h1, .posts_add_container h1{
   color:var(--clr-neutral);
@@ -464,7 +461,6 @@ input{
 .post_submit input:hover{
   color: var(--clr-neutral-100);
   cursor: pointer;
-
 }
 
 /* famous vikingdsiwdnqaidqwdjiqw */
@@ -475,7 +471,6 @@ input{
   font-size: 1vw;
 }
 
-
 .wrapper_card_80, .wrapper_card_60, .wrapper_card_0 {
   border-radius: 0.5vw;
   width:15vw;
@@ -484,7 +479,6 @@ input{
   text-align: center;
   float: left;
   margin:1.9%;
-
 }
 
 .wrapper_card_80:hover , .wrapper_card_60:hover, .wrapper_card_0:hover{
@@ -610,7 +604,6 @@ input{
   height:3.5%;
 }
 
-
 .pass_change input:hover{
   border-radius: 0.2vw;
   margin:  5% 0 0 0;
@@ -632,18 +625,13 @@ input{
   width:50%;
 }
 
-
 #logout_submit:hover{
   opacity: 0.7;
-
 }
 
-
-.logout{
-
+.logout p {
+  color:var(--clr-neutral-200);
 }
-
-
 /* 4000000000000000000000000004 */
 
 .four_wrapper{

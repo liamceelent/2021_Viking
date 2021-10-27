@@ -30,13 +30,13 @@
     <div class = "question_box">
       <div class = "splitter">
         <p>{{ question.title }} </p>
-        <p>{{ question.question }} by {{question.users.name}}</p>
+        <p>{{ question.question }} by {{question.users.name}}</p>  <!-- user qesution info-->
         <button id= "reply_btn">reply</button>
         <div id = "reply" class="reply">
           <div class = "reply_forms">
             <form method="POST" enctype="multipart/form-data" action="/comment/{{ question.id }}" id="reply_form">
               {{ form.csrf_token }}
-              <p> {{ form.comment(class_='forms_input',autocomplete="off") }} </p>
+              <p> {{ form.comment(class_='forms_input',autocomplete="off") }} </p>  <!-- the comment code -->
               <input type="submit" value="comment" id = "reply_submit">
             </form>
           </div>
@@ -45,13 +45,13 @@
       </div>
       <div class = "splitter_2">
 
-        {% if not question.comments %}
+        {% if not question.comments %}  <!-- if there are no comment -->
           <button id = "view_comments">no comments yet</button>
         {%else%}
           <button id = "view_comments">view comments</button>
         {%endif%}
 
-        {% for comment in question.comments %}
+        {% for comment in question.comments %} <!-- getting all of the comments from a question-->
 
         <div id = "comments" class="comments">
           <div class ="comment_section">
@@ -71,6 +71,7 @@
 
 <!-- script to show or dont show div -->
 
+
 <script>
   function toggle1(event) {
     console.log("comment")
@@ -85,7 +86,7 @@
     });
 
   }
-
+// script to trgger the dont show javascript when a button is clicked
   document.querySelectorAll(".splitter_2 button")
     .forEach(element => element.addEventListener("click", toggle1));
 
