@@ -159,11 +159,16 @@ def map():
     if request.method=='GET':
         current_user = session.get('name')
         period = 1
-        locations  = models.Location.query.all()
+        locations  = models.Location_Faction.query.filter_by(period = period).all()
+        print(locations)
         location = []
         for i in range(len(locations)):
-            location.append(locations[i].name)
+            x = models.Location.query.filter_by(id = locations[i].lid).first()
+            location.append(x.name)
+
+        print(location)
         clans  = models.Faction.query.all()
+
         factions = models.Location_Faction.query.filter_by(period = period).all()
         faction= []
         for i in range(len(factions)):
@@ -172,6 +177,8 @@ def map():
             "faction": faction,
             "location": location,
         }
+        print("efeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        print(places)
         return render_template('map.html', page_title="map", user = current_user, places = places,clan=clans)
 
 
@@ -183,20 +190,20 @@ def map_java():
     period = period.get('period')
     print(period)
 
-    locations  = models.Location.query.all()
+    locations  = models.Location_Faction.query.filter_by(period = period).all()
+    print(locations)
     location = []
     for i in range(len(locations)):
-        location.append(locations[i].name)
+        x = models.Location.query.filter_by(id = locations[i].lid).first()
+        location.append(x.name)
 
+    print(location)
     clans  = models.Faction.query.all()
 
     factions = models.Location_Faction.query.filter_by(period = period).all()
-
     faction= []
-
     for i in range(len(factions)):
         faction.append(factions[i].fid)
-
     places = {
         "faction": faction,
         "location": location,
