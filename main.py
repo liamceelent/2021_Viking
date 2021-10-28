@@ -7,7 +7,7 @@ import json
 import smtplib
 import hashlib
 import os
-
+import flake8
 
 app = Flask(__name__)
 app.config.from_object(Config)  # applying all config to app
@@ -160,13 +160,11 @@ def map():
         current_user = session.get('name')
         period = 1
         locations  = models.Location_Faction.query.filter_by(period = period).all()
-        print(locations)
         location = []
         for i in range(len(locations)):
             x = models.Location.query.filter_by(id = locations[i].lid).first()
             location.append(x.name)
 
-        print(location)
         clans  = models.Faction.query.all()
 
         factions = models.Location_Faction.query.filter_by(period = period).all()
@@ -177,8 +175,6 @@ def map():
             "faction": faction,
             "location": location,
         }
-        print("efeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-        print(places)
         return render_template('map.html', page_title="map", user = current_user, places = places,clan=clans)
 
 
@@ -186,36 +182,33 @@ def map():
 def map_java():
 
     period = json.loads(request.get_data())  # getting the data from map page
-    print(period)
     period = period.get('period')
-    print(period)
-
     locations  = models.Location_Faction.query.filter_by(period = period).all()
-    print(locations)
     location = []
     for i in range(len(locations)):
         x = models.Location.query.filter_by(id = locations[i].lid).first()
         location.append(x.name)
 
-    print(location)
     clans  = models.Faction.query.all()
 
     factions = models.Location_Faction.query.filter_by(period = period).all()
     faction= []
     for i in range(len(factions)):
         faction.append(factions[i].fid)
+
     places = {
         "faction": faction,
         "location": location,
     }
-    print("yooo")
-    print(places["location"] , places["faction"])
 
     return(json.dumps(places))
 
 
 @app.route('/<int:id>', methods=['POST', 'GET'])  # getting what comment goes where
 def click_map(id):
+    if id > 41:
+        return render_template('404.html')
+
     id = int(id) + 1
     location = models.Location.query.filter_by(id = id)
     print(location)
@@ -405,12 +398,8 @@ def famous():
 @app.route('/famous_click', methods=['POST', 'GET'])
 def famous_click():
     current_user = session.get('name')
-
     viking_id = request.args.get('viking_id')
-    print(viking_id)
     stats = models.Famous_Viking.query.filter_by(id = viking_id).all()
-    print(stats)
-
     return render_template('famous_click.html', page_title="famous", user = current_user\
     , stats = stats)
 
