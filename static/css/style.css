@@ -191,8 +191,6 @@ button:hover{
   width:90%;
   height:24vh;
   margin:5% 5% 5% 5%;
-  border: 0.5vw solid var(--clr-neutral-100);
-  border-radius: 1vw;
 }
 
 .map_wrapper p{
